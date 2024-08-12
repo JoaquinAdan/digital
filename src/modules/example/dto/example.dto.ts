@@ -1,0 +1,1 @@
+// dto for data transfere interfaces
