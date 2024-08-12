@@ -23,7 +23,7 @@ const NavMegaMenu = () => {
         </div>
         <div className='hidden gap-2 lg:flex'>
           <Button variant='text' size='sm' color='blue-gray'>
-            Registrarte
+            Registrarte!
           </Button>
           <Button variant='gradient' size='sm' className='w-32'>
             Iniciar sesión
