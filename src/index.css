@@ -7,3 +7,16 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+.font-sans {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.gradient-background {
+  background: linear-gradient(
+    180deg,
+    rgba(182, 125, 207, 1) 0%,
+    rgba(223, 201, 232, 1) 2%,
+    rgba(246, 242, 247, 1) 4%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}

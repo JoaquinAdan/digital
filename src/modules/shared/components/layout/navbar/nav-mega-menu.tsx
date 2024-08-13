@@ -22,10 +22,7 @@ const NavMegaMenu = () => {
           <NavList />
         </div>
         <div className='hidden gap-2 lg:flex'>
-          <Button variant='text' size='sm' color='blue-gray'>
-            Registrarte!
-          </Button>
-          <Button variant='gradient' size='sm' className='w-32'>
+          <Button variant='gradient' color='purple' size='sm' className='w-32'>
             Iniciar sesión
           </Button>
         </div>
@@ -36,11 +33,8 @@ const NavMegaMenu = () => {
       <Collapse open={openNav}>
         <NavList />
         <div className='flex w-full flex-nowrap items-center gap-2 lg:hidden'>
-          <Button variant='outlined' size='sm' color='blue-gray' fullWidth>
-            Log In
-          </Button>
-          <Button variant='gradient' size='sm' fullWidth>
-            Sign In
+          <Button variant='gradient' color='purple' size='sm' fullWidth>
+            Iniciar sesión
           </Button>
         </div>
       </Collapse>

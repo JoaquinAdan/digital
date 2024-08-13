@@ -15,48 +15,48 @@ import React from 'react'
 
 const navListMenuItems = [
   {
-    title: 'Products',
-    description: 'Find the perfect solution for your needs.',
+    title: 'Reclamos',
+    description: 'Genere un reclamo para que el municipio lo atienda si es de su competencia.',
     icon: SquaresPlusIcon,
   },
   {
-    title: 'About Us',
-    description: 'Meet and learn about our dedication',
+    title: 'Reclamos',
+    description: 'Genere un reclamo para que el municipio lo atienda si es de su competencia.',
     icon: UserGroupIcon,
   },
   {
-    title: 'Blog',
-    description: 'Find the perfect solution for your needs.',
+    title: 'Reclamos',
+    description: 'Genere un reclamo para que el municipio lo atienda si es de su competencia.',
     icon: Bars4Icon,
   },
   {
-    title: 'Services',
-    description: 'Learn how we can help you achieve your goals.',
+    title: 'Reclamos',
+    description: 'Genere un reclamo para que el municipio lo atienda si es de su competencia.',
     icon: SunIcon,
   },
   {
-    title: 'Support',
-    description: 'Reach out to us for assistance or inquiries',
+    title: 'Reclamos',
+    description: 'Genere un reclamo para que el municipio lo atienda si es de su competencia.',
     icon: GlobeAmericasIcon,
   },
   {
-    title: 'Contact',
-    description: 'Find the perfect solution for your needs.',
+    title: 'Reclamos',
+    description: 'Genere un reclamo para que el municipio lo atienda si es de su competencia.',
     icon: PhoneIcon,
   },
   {
-    title: 'News',
-    description: 'Read insightful articles, tips, and expert opinions.',
+    title: 'Reclamos',
+    description: 'Genere un reclamo para que el municipio lo atienda si es de su competencia.',
     icon: NewspaperIcon,
   },
   {
-    title: 'Products',
-    description: 'Find the perfect solution for your needs.',
+    title: 'Reclamos',
+    description: 'Genere un reclamo para que el municipio lo atienda si es de su competencia.',
     icon: RectangleGroupIcon,
   },
   {
-    title: 'Special Offers',
-    description: 'Explore limited-time deals and bundles',
+    title: 'Reclamos',
+    description: 'Genere un reclamo para que el municipio lo atienda si es de su competencia.',
     icon: TagIcon,
   },
 ]
@@ -96,7 +96,7 @@ const NavMenu = () => {
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
-              Resources
+              Aplicaciones
               <ChevronDownIcon
                 strokeWidth={2.5}
                 className={`hidden h-3 w-3 transition-transform lg:block ${isMenuOpen ? 'rotate-180' : ''}`}

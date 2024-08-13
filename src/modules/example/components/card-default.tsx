@@ -9,7 +9,7 @@ interface Props {
 
 export function CardPokemon({ image, name, refetch, isLoading }: Props) {
   return (
-    <Card className='mt-6 w-96'>
+    <Card className='w-96'>
       {isLoading ? (
         <>
           <CardHeader className='relative h-56 bg-gray-300 animate-pulse'>
@@ -36,18 +36,18 @@ export function CardPokemon({ image, name, refetch, isLoading }: Props) {
         </>
       ) : (
         <>
-          <CardHeader color='blue-gray' className='relative h-56 '>
+          <CardHeader color='blue-gray' className='relative h-56'>
             <img src={image} alt={`card-image ${name}`} className='h-56 m-auto' />
           </CardHeader>
           <CardBody>
-            <Typography variant='h5' color='blue-gray' className='mb-2  capitalize'>
+            <Typography variant='h5' color='blue-gray' className='mb-2 capitalize'>
               {name}
             </Typography>
           </CardBody>
         </>
       )}
       <CardFooter className='pt-0'>
-        <Button loading={isLoading} onClick={refetch}>
+        <Button loading={isLoading} color='purple' onClick={refetch}>
           Cargar otro
         </Button>
       </CardFooter>
