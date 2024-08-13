@@ -9,7 +9,7 @@ interface DefaultLayoutProps {
 export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   return (
     <div className='min-h-screen flex flex-col justify-center items-center h-full gradient-background w-full font-sans'>
-      <NavMegaMenu />
+      {/* <NavMegaMenu /> */}
       <div className='flex-1 flex mt-6 justify-center container'>{children ?? <Outlet />}</div>
     </div>
   )

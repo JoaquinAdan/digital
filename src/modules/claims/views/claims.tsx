@@ -1,7 +1,6 @@
 import AppLayout from '@/modules/shared/components/layout/app-layout'
 import { motion } from 'framer-motion'
 import React from 'react'
-import { ClaimsTable } from '../use-cases/list-claims'
 
 const variants = {
   open: { scale: 0, display: 'none', opacity: 0 },
@@ -23,9 +22,7 @@ const Claims = () => {
           animate={isOpen ? 'open' : 'closed'}
           variants={variants}
           className={` ${divStyle} cursor-pointer h-full flex`}
-        >
-          <ClaimsTable />
-        </motion.div>
+        ></motion.div>
         <motion.div
           animate={isOpen ? 'closed' : 'open'}
           variants={variants}
