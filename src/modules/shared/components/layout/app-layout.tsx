@@ -1,6 +1,6 @@
-import { Button, Typography } from '@material-tailwind/react'
 import { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
+import { Button } from '../ui/button'
 
 interface Props {
   children: ReactNode
@@ -14,15 +14,13 @@ const AppLayout = ({ children, title, description, adminPath }: Props) => {
     <div className='w-full'>
       <div className='flex w-full justify-between items-center'>
         <div>
-          <Typography variant='h1' color='blue-gray' className='flex text-lg items-center font-bold'>
+          <h1 color='blue-gray' className='flex text-lg items-center font-bold'>
             {title}
-          </Typography>
-          <Typography variant='paragraph' className='text-md font-medium text-blue-gray-500'>
-            {description}
-          </Typography>
+          </h1>
+          <p className='text-md font-medium text-blue-gray-500'>{description}</p>
         </div>
         <Link to={adminPath}>
-          <Button variant='gradient' color='purple' size='sm'>
+          <Button color='purple' size='sm'>
             Admin
           </Button>
         </Link>

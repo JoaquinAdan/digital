@@ -3,8 +3,8 @@ import { motion } from 'framer-motion'
 import React from 'react'
 
 const variants = {
-  open: { scale: 0, display: 'none', opacity: 0 },
-  closed: { scale: 1, display: 'block', opacity: 1 },
+  open: { flex: 1 },
+  closed: { flex: 10 },
 }
 
 const Claims = () => {
@@ -21,8 +21,10 @@ const Claims = () => {
         <motion.div
           animate={isOpen ? 'open' : 'closed'}
           variants={variants}
-          className={` ${divStyle} cursor-pointer h-full flex`}
-        ></motion.div>
+          className={`bg-red-500 ${divStyle} cursor-pointer h-full flex`}
+        >
+          TABLA
+        </motion.div>
         <motion.div
           animate={isOpen ? 'closed' : 'open'}
           variants={variants}
