@@ -2,7 +2,6 @@
 // import NavMenu from './nav-menu'
 
 import { cn } from '@/lib/utils'
-import { NavigationMenuLink } from '@radix-ui/react-navigation-menu'
 import React from 'react'
 
 // const NavList = () => {
@@ -33,26 +32,26 @@ const ListItem = React.forwardRef<React.ElementRef<'a'>, ListItemProps>(
   ({ className, title, children, icon, ...props }, ref) => {
     return (
       <li>
-        <NavigationMenuLink asChild>
-          <a
-            ref={ref}
-            className={cn(
-              'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-              className
-            )}
-            {...props}
-          >
-            <div className='flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 '>
-              {' '}
-              {React.createElement(icon, {
-                strokeWidth: 2,
-                className: 'h-6 text-gray-900 w-6',
-              })}
-            </div>
+        <a
+          ref={ref}
+          className={cn(
+            'select-none space-y-1 rounded-md p-1 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground flex gap-3 items-center',
+            className
+          )}
+          {...props}
+        >
+          <div className='flex items-center justify-center rounded-lg bg-blue-100 h-10 w-10 p-2 '>
+            {' '}
+            {React.createElement(icon, {
+              strokeWidth: 2,
+              className: 'h-6 text-gray-900 w-6',
+            })}
+          </div>
+          <div>
             <div className='text-sm font-medium leading-none'>{title}</div>
             <p className='line-clamp-2 text-sm leading-snug text-muted-foreground'>{children}</p>
-          </a>
-        </NavigationMenuLink>
+          </div>
+        </a>
       </li>
     )
   }

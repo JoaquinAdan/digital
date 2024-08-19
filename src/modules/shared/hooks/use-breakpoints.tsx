@@ -1,7 +1,7 @@
 import breakpoints from '@/configs/constants/breakpoints'
 import { useEffect, useState } from 'react'
 
-const useBreakpoint = (initialBreakpoint: 'xs' | 'sm' | 'md' | 'lg' | 'xl'): boolean => {
+const useBreakpoint = (initialBreakpoint: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'): boolean => {
   const [isLessThanBreakpoint, setIsLessThanBreakpoint] = useState(false)
 
   useEffect(() => {
