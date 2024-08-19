@@ -49,7 +49,7 @@ export default function NavMegaMenu() {
               <img src={logo} alt='logo' className='w-32' />
             </AccordionTrigger>
             <AccordionContent className='gap-2 flex flex-col'>
-              <Button variant='ghost' className='w-full'>
+              <Button variant='ghost' className='w-full shadow-md'>
                 Inicio
               </Button>
               <Accordion type='single' collapsible className='w-full shadow-md rounded-md'>
@@ -63,7 +63,7 @@ export default function NavMegaMenu() {
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
-              <Button variant='ghost' className='w-full'>
+              <Button variant='ghost' className='w-full  shadow-md'>
                 Contacto
               </Button>
             </AccordionContent>

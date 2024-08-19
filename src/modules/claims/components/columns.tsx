@@ -1,17 +1,8 @@
 import Sort from '@/modules/shared/components/table/sort'
 import { ColumnDef } from '@tanstack/react-table'
-import ActionsIncident from './actions-incident'
 import { Incident } from '../dto/incident.dto'
 
 export const columns: ColumnDef<Incident>[] = [
-  {
-    id: 'actions',
-    header: 'Acciones',
-    enableHiding: false,
-    cell: ({ row }) => {
-      return <ActionsIncident id={row.original.id} />
-    },
-  },
   {
     accessorKey: 'id',
     header: ({ column }) => <Sort column={column} name='ID' />,
