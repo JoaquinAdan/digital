@@ -25,7 +25,7 @@ const AppLayout = ({ children, title, description, adminPath }: Props) => {
           </Button>
         </Link>
       </div>
-      <div className='mt-10 w-full'>{children}</div>
+      <div className='mt-6 w-full'>{children}</div>
     </div>
   )
 }

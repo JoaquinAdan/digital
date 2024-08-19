@@ -43,7 +43,7 @@ export default function TableShared<T>({
       </div>
       <div className='rounded-md border'>
         <Table>
-          <TableHeader className='bg-gray-100'>
+          <TableHeader className='bg-gray-50'>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
