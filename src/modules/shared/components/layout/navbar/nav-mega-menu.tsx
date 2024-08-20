@@ -13,10 +13,10 @@ import {
 } from '@/modules/shared/components/ui/navigation-menu'
 import { ChevronDown, Menu } from 'lucide-react'
 import NavMenu from './nav-menu'
+import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
 
 export default function NavMegaMenu() {
   const breakpoint = useBreakpoint('xl')
-
   return (
     <div className='bg-white rounded-xl mt-2 container flex justify-between py-1 xl:py-3 px-3 shadow-md'>
       {!breakpoint ? (
@@ -38,9 +38,7 @@ export default function NavMegaMenu() {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-          <Button className='w-32' size='sm'>
-            Iniciar sesión
-          </Button>
+          <LoginButton width='w-32' />
         </>
       ) : (
         <Accordion type='single' collapsible className='w-full'>
@@ -48,11 +46,11 @@ export default function NavMegaMenu() {
             <AccordionTrigger icon={<Menu className='h-8 w-8 shrink-0 transition-transform duration-200' />}>
               <img src={logo} alt='logo' className='w-32' />
             </AccordionTrigger>
-            <AccordionContent className='gap-2 flex flex-col'>
-              <Button variant='ghost' className='w-full shadow-md'>
+            <AccordionContent className='gap-2 pb-1 flex flex-col'>
+              <Button variant='ghost' className='w-full border-b-2'>
                 Inicio
               </Button>
-              <Accordion type='single' collapsible className='w-full shadow-md rounded-md'>
+              <Accordion type='single' collapsible className='w-full border-b-2 rounded-md'>
                 <AccordionItem value='item-1'>
                   <AccordionTrigger hover='background'>
                     <ChevronDown className='h-4 w-4 shrink-0 opacity-0' />
@@ -63,13 +61,36 @@ export default function NavMegaMenu() {
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
-              <Button variant='ghost' className='w-full  shadow-md'>
+              <Button variant='ghost' className='w-full '>
                 Contacto
               </Button>
+              <LoginButton width='w-full' />
             </AccordionContent>
           </AccordionItem>
         </Accordion>
       )}
     </div>
+  )
+}
+
+const LoginButton = ({ width }: { width: string }) => {
+  return (
+    <>
+      {/* <Button className={width} size='sm'>
+        Iniciar sesión
+      </Button> */}
+      <div className={`flex justify-center space-x-2 max-${width}`}>
+        <Avatar>
+          <AvatarImage src='https://github.com/vercel.png' />
+          <AvatarFallback>VC</AvatarFallback>
+        </Avatar>
+        <div>
+          <h4 className='text-sm font-semibold'>@nextjs</h4>
+          <div className='flex items-center'>
+            <span className='text-xs text-muted-foreground'>ADMIN</span>
+          </div>
+        </div>
+      </div>
+    </>
   )
 }

@@ -12,7 +12,7 @@ type Props<T> = {
   setDate: (date: DateRange | undefined) => void
 }
 
-export default function Filter<T>({ filterValue, setFilterValue, table, type, totalPages, date, setDate }: Props<T>) {
+export default function Filter<T>({ date, setDate }: Props<T>) {
   return (
     <div className='flex flex-col sm:flex-row sm:justify-between gap-2 w-full mt-4'>
       <DateRangeInput date={date} setDate={setDate} />

@@ -3,7 +3,7 @@ import { RouteObject } from 'react-router'
 import { ClaimsView } from './imports'
 
 export const claimsRoutes: RouteObject = {
-  path: '/reclamos',
+  path: '/admin/reclamos',
   element: <DefaultLayout />,
   children: [
     {

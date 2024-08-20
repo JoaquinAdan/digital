@@ -1,15 +1,13 @@
-
 import { useQueryClient } from '@tanstack/react-query'
 import { SortingState, getCoreRowModel, getFilteredRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
 import React, { useEffect } from 'react'
 import type { DateRange } from 'react-day-picker'
-// import { GET_INCIDENTS_KEY, useIncidents } from '../../../hooks/use-incidents'
-import { Incident } from '../../dto/incident.dto'
+import { Claim } from '../../dto/claim.dto'
 import { columns } from '../../components/columns'
 import { FilterDto } from '../../models/filter'
 import TableShared from '@/modules/shared/components/table/table'
 
-export default function TableIncidents() {
+export default function TableClaims() {
   const [filters, setFilters] = React.useState<FilterDto>({ page: 1, limit: 10 } as FilterDto)
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [pagination, setPagination] = React.useState({
@@ -31,7 +29,7 @@ export default function TableIncidents() {
   }
 
   const table = useReactTable({
-    data: (data as { data: Incident[] })?.data || [],
+    data: (data as { data: Claim[] })?.data || [],
     columns,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
@@ -90,9 +88,9 @@ export default function TableIncidents() {
   }, [filters, queryClient])
 
   return (
-    <TableShared<Incident>
+    <TableShared<Claim>
       columns={columns}
-      filterType='incidents'
+      filterType='claims'
       totalPages={data ? data.totalPages : 1}
       setFilterValue={setFilterValue}
       filterValue={filterValue}

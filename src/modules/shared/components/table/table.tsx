@@ -8,7 +8,7 @@ import Pagination from './pagination'
 
 type TableSharedProps<T> = {
   columns: ColumnDef<T>[]
-  filterType: 'incidents' | 'events'
+  filterType: string
   filterValue: { type: string; value: string; label: string }
   setFilterValue: (value: { type: string; value: string; label: string }) => void
   date: DateRange | undefined

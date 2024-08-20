@@ -1,5 +1,5 @@
 import AppLayout from '@/modules/shared/components/layout/app-layout'
-import TableIncidents from '../use-cases/list-claims'
+import TableClaims from '../use-cases/list-claims'
 
 const Claims = () => {
   return (
@@ -9,7 +9,7 @@ const Claims = () => {
       adminPath='reclamos'
     >
       <div className='bg-white rounded-md justify-center items-center w-full cursor-pointer h-full flex px-3'>
-        <TableIncidents />
+        <TableClaims />
       </div>
     </AppLayout>
   )
