@@ -8,5 +8,5 @@ interface AuthStore {
 
 export const useAuthStore = create<AuthStore>((set) => ({
   setUser: (user: User | null) => set({ user }),
-  user: null,
+  user: JSON.parse(localStorage.getItem('user') || 'null'),
 }))

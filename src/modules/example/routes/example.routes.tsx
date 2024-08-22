@@ -4,7 +4,7 @@ import { RouteObject } from 'react-router'
 import { ExampleView } from './imports'
 
 export const exampleRoutes: RouteObject = {
-  path: '/example',
+  path: '/ejemplo',
   element: (
     <PublicRoute>
       <DefaultLayout />

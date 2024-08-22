@@ -22,7 +22,10 @@ import LoadingButton from '../../ui/loading-button'
 export default function NavMegaMenu() {
   const breakpoint = useBreakpoint('xl')
   return (
-    <div className='bg-white rounded-xl mt-2 container flex justify-between py-1 xl:py-3 px-3 shadow-md'>
+    <div
+      data-aos='fade-down'
+      className='bg-white rounded-xl mt-2 container flex justify-between py-1 xl:py-3 px-3 shadow-md'
+    >
       {!breakpoint ? (
         <>
           <img src={logo} alt='logo' className='w-32' />

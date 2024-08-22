@@ -16,9 +16,6 @@ const NavMenu = () => {
     navItems = [...navItems, ...filteredArray]
   }
 
-  console.log(navItems)
-  console.log(publicItems)
-
   return (
     <ul className='grid w-[1000px] gap-3 p-0 xl:p-4 xl:grid-cols-3'>
       {navItems.map((component) => (

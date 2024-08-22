@@ -1,17 +1,7 @@
-import { CircleHelp } from 'lucide-react'
-import { NavItem } from '../../models/nav-item'
-import { VISIBILITY } from '@/configs/constants/visibility'
+import electronicAddressUsers from '@/modules/electronic-address/routes/nav-item'
 import navExample from '@/modules/example/routes/nav-item'
+import { NavItem } from '../../models/nav-item'
 
-const publicItems: NavItem[] = [
-  {
-    title: '???',
-    href: '/admin/???',
-    description: '??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ',
-    icon: CircleHelp,
-    visibility: VISIBILITY.PUBLIC,
-  },
-  navExample,
-]
+const publicItems: NavItem[] = [electronicAddressUsers, navExample]
 
 export default publicItems
