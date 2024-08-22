@@ -1,3 +1,4 @@
+import { VISIBILITY, visibilityText } from '@/configs/constants/visibility'
 import { cn } from '@/lib/utils'
 import React from 'react'
 
@@ -7,10 +8,11 @@ type ListItemProps = {
   children?: React.ReactNode
   href?: string
   icon: React.ForwardRefExoticComponent<Omit<React.SVGProps<SVGSVGElement>, 'ref'>>
+  visibility: keyof typeof VISIBILITY
 }
 
 const ListItem = React.forwardRef<React.ElementRef<'a'>, ListItemProps>(
-  ({ className, title, children, icon, ...props }, ref) => {
+  ({ className, title, children, icon, visibility, ...props }, ref) => {
     return (
       <li>
         <a
@@ -28,7 +30,10 @@ const ListItem = React.forwardRef<React.ElementRef<'a'>, ListItemProps>(
             })}
           </div>
           <div>
-            <div className='text-sm font-medium leading-none'>{title}</div>
+            <div className='w-full flex justify-between items-start'>
+              <p className='text-sm font-medium leading-none'>{title}</p>
+              <p className='text-xs font-medium leading-none text-gray-400'>{visibilityText[visibility]}</p>
+            </div>
             <p className='line-clamp-2 text-sm leading-snug text-muted-foreground'>{children}</p>
           </div>
         </a>

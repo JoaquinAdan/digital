@@ -1,37 +1,34 @@
-import { Angry, CircleHelp, Ruler } from 'lucide-react'
+import useAuth from '@/modules/auth/hooks/use-auth'
+import protectedItems from '../../routes/protected-items'
+import publicItems from '../../routes/public-items'
 import ListItem from './nav-list-item'
 
-const components: {
-  title: string
-  href: string
-  description: string
-  icon: React.ForwardRefExoticComponent<Omit<React.SVGProps<SVGSVGElement>, 'ref'>>
-}[] = [
-  {
-    title: 'Reclamos',
-    href: '/admin/reclamos',
-    description: 'Administra los reclamos de los vecinos de la ciudad.',
-    icon: Angry,
-  },
-  {
-    title: 'Example',
-    href: '/example',
-    description: 'Pagina de ejemplo con estructura de carpetas del proyecto.',
-    icon: Ruler,
-  },
-  {
-    title: '???',
-    href: '/admin/???',
-    description: '??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ??? ',
-    icon: CircleHelp,
-  },
-]
-
 const NavMenu = () => {
+  const { user } = useAuth()
+
+  let navItems = publicItems
+  if (user) {
+    const scopes = user.roles.flatMap((role) => role.permissions.map((permission) => permission.scope))
+    const hasWildcard = scopes.includes('*')
+    const filteredArray = hasWildcard
+      ? protectedItems
+      : protectedItems.filter((item) => scopes.some((scope) => item.href.includes(scope)))
+    navItems = [...navItems, ...filteredArray]
+  }
+
+  console.log(navItems)
+  console.log(publicItems)
+
   return (
     <ul className='grid w-[1000px] gap-3 p-0 xl:p-4 xl:grid-cols-3'>
-      {components.map((component) => (
-        <ListItem key={component.title} title={component.title} href={component.href} icon={component.icon}>
+      {navItems.map((component) => (
+        <ListItem
+          key={component.title}
+          title={component.title}
+          href={component.href}
+          icon={component.icon}
+          visibility={component.visibility}
+        >
           {component.description}
         </ListItem>
       ))}

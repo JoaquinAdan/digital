@@ -6,7 +6,6 @@ const Claims = () => {
     <AppLayout
       title='Reclamos'
       description='Genere un reclamo para que el municipio lo atienda si es de su competencia.'
-      adminPath='reclamos'
     >
       <div className='bg-white rounded-md justify-center items-center w-full cursor-pointer h-full flex px-3'>
         <TableClaims />

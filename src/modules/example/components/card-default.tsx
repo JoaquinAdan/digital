@@ -1,6 +1,5 @@
-import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/modules/shared/components/ui/card'
-import { LoaderCircle } from 'lucide-react'
+import LoadingButton from '@/modules/shared/components/ui/loading-button'
 
 interface Props {
   image: string
@@ -42,10 +41,9 @@ const CardPokemon = ({ image, name, refetch, isLoading }: Props) => {
         )}
       </CardContent>
       <CardFooter className='flex justify-between'>
-        <Button disabled={isLoading} size='sm' color='purple' onClick={refetch}>
-          {isLoading && <LoaderCircle className='w-4 h-4 animate-spin mr-1' />}
+        <LoadingButton isLoading={isLoading} size='sm' color='purple' onClick={refetch}>
           Cargar otro
-        </Button>
+        </LoadingButton>
       </CardFooter>
     </Card>
   )

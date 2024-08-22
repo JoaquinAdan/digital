@@ -14,6 +14,10 @@ import {
 import { ChevronDown, Menu } from 'lucide-react'
 import NavMenu from './nav-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
+import { Link } from 'react-router-dom'
+import navHome from '@/modules/home/routes/nav-item'
+import useAuth from '@/modules/auth/hooks/use-auth'
+import LoadingButton from '../../ui/loading-button'
 
 export default function NavMegaMenu() {
   const breakpoint = useBreakpoint('xl')
@@ -25,7 +29,9 @@ export default function NavMegaMenu() {
           <NavigationMenu className='w-full max-w-none mx-16'>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>Inicio</NavigationMenuLink>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()} href={navHome.href}>
+                  {navHome.title}
+                </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Aplicaciones</NavigationMenuTrigger>
@@ -34,7 +40,7 @@ export default function NavMegaMenu() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>Contacto</NavigationMenuLink>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>Contactos</NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
@@ -47,9 +53,11 @@ export default function NavMegaMenu() {
               <img src={logo} alt='logo' className='w-32' />
             </AccordionTrigger>
             <AccordionContent className='gap-2 pb-1 flex flex-col'>
-              <Button variant='ghost' className='w-full border-b-2'>
-                Inicio
-              </Button>
+              <Link to={navHome.href}>
+                <Button variant='ghost' className='w-full border-b-2'>
+                  {navHome.title}
+                </Button>
+              </Link>
               <Accordion type='single' collapsible className='w-full border-b-2 rounded-md'>
                 <AccordionItem value='item-1'>
                   <AccordionTrigger hover='background'>
@@ -61,9 +69,11 @@ export default function NavMegaMenu() {
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
+              {/* <Link to={}> */}
               <Button variant='ghost' className='w-full '>
                 Contacto
               </Button>
+              {/* </Link> */}
               <LoginButton width='w-full' />
             </AccordionContent>
           </AccordionItem>
@@ -74,23 +84,29 @@ export default function NavMegaMenu() {
 }
 
 const LoginButton = ({ width }: { width: string }) => {
+  const { user, login, logout, isLoadingLogin } = useAuth()
   return (
     <>
-      {/* <Button className={width} size='sm'>
-        Iniciar sesión
-      </Button> */}
-      <div className={`flex justify-center space-x-2 max-${width}`}>
-        <Avatar>
-          <AvatarImage src='https://github.com/vercel.png' />
-          <AvatarFallback>VC</AvatarFallback>
-        </Avatar>
-        <div>
-          <h4 className='text-sm font-semibold'>@nextjs</h4>
-          <div className='flex items-center'>
-            <span className='text-xs text-muted-foreground'>ADMIN</span>
+      {user ? (
+        <div className={`flex justify-center space-x-2 max-${width}`}>
+          <Avatar>
+            <AvatarImage src='https://github.com/vercel.png' />
+            <AvatarFallback>VC</AvatarFallback>
+          </Avatar>
+          <div>
+            <h4 className='text-sm font-semibold'>@nextjs</h4>
+            <div className='flex items-center'>
+              <button className='text-xs text-muted-foreground' onClick={logout}>
+                logout
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <LoadingButton isLoading={isLoadingLogin} className={width} size='sm' onClick={login}>
+          Iniciar sesión
+        </LoadingButton>
+      )}
     </>
   )
 }
