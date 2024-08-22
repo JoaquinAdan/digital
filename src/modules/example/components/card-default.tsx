@@ -37,7 +37,7 @@ const CardPokemon = ({ image, name, refetch, isLoading }: Props) => {
         {isLoading ? (
           <div className='mt-2 mb-1 h-3 w-56 rounded-full bg-gray-300'>&nbsp;</div>
         ) : (
-          <CardTitle>{name}</CardTitle>
+          <CardTitle className='text-gray-700'>{name}</CardTitle>
         )}
       </CardContent>
       <CardFooter className='flex justify-between'>

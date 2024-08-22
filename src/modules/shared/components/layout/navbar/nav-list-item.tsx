@@ -31,7 +31,7 @@ const ListItem = React.forwardRef<React.ElementRef<'a'>, ListItemProps>(
           </div>
           <div>
             <div className='w-full flex justify-between items-start'>
-              <p className='text-sm font-medium leading-none'>{title}</p>
+              <p className='text-sm text-gray-700 font-medium leading-none'>{title}</p>
               <p className='text-xs font-medium leading-none text-gray-400'>{visibilityText[visibility]}</p>
             </div>
             <p className='line-clamp-2 text-sm leading-snug text-muted-foreground'>{children}</p>

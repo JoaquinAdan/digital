@@ -1,10 +1,9 @@
 const Home = () => {
   return (
-    <div className="flex flex-col items-center">
-      <div>view</div>
-      <div>view</div>
-      <div>view</div>
-      <div>view</div>
+    <div className='w-full flex flex-col items-center '>
+      <div>
+        <h1 className='text-2xl typeWriter font-bold text-gray-700 block text-nowrap w-full overflow-hidden'>Bienvenidos a Campana digital</h1>
+      </div>
     </div>
   )
 }

@@ -68,6 +68,23 @@
   }
 }
 
+.typeWriter {
+  border-right: 2px solid;
+  animation: typing 2s steps(29), blink 0.5s infinite step-end alternate;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  60% {
+    border-color: transparent;
+  }
+}
+
 .gradient-background {
   background: linear-gradient(
     180deg,
