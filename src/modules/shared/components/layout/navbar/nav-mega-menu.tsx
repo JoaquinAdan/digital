@@ -97,7 +97,7 @@ const LoginButton = ({ width }: { width: string }) => {
             <AvatarFallback>VC</AvatarFallback>
           </Avatar>
           <div>
-            <h4 className='text-sm font-semibold'>@nextjs</h4>
+            <h4 className='text-sm font-semibold text-nowrap'>{user.name.split(' ')[0]}</h4>
             <div className='flex items-center'>
               <button className='text-xs text-muted-foreground' onClick={logout}>
                 logout

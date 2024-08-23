@@ -4,15 +4,15 @@ import { Button } from '@/modules/shared/components/ui/button'
 
 const ElectronicAddress = () => {
   return (
-    <div className='flex flex-col'>
-      <article className='flex flex-col gap-2 items-centerw-full mt-5'>
+    <div className='flex flex-col px-3'>
+      <article className='flex flex-col gap-2 items-centerw-full lg:mt-5'>
         <div className='flex justify-between'>
-          <div className='flex flex-col gap-1 md:gap-3 justify-center items-start h-full w-full md:maw-w-[50vw] lg:max-w-[35vw]'>
-            <h1 className='font-bold text-center md:text-left text-md md:text-5xl text-gray-700'>
+          <div className='flex flex-col gap-1 md:gap-3 justify-center items-start h-full w-full'>
+            <h1 className='font-bold  text-xl md:text-4xl lg:text-5xl text-gray-700'>
               Plataforma de dirección electronica fiscal
             </h1>
-            <div className='flex md:flex-row-reverse lg:flex-row flex-col gap-1'>
-              <img className='hidden md:block w-12 ml-[-50px]' src={renaper} alt='Logo renaper' />
+            <div className='flex md:flex-row-reverse 2xl:flex-row flex-col gap-1'>
+              <img className='hidden xl:block w-12 2xl:ml-[-50px]' src={renaper} alt='Logo renaper' />
               <p className='font-bold text-gray-700'>
                 Podrás autenticarte ingresando tu Documento Nacional de Identidad, sexo correspondiente y el número de
                 trámite que figura en tu DNI
@@ -22,11 +22,11 @@ const ElectronicAddress = () => {
               Autenticar
             </Button>
           </div>
-          <img className='hidden md:block' src={purplesvg} alt='svg sobre personas conectando' />
+          <img className='hidden lg:block' src={purplesvg} alt='svg sobre personas conectando' />
         </div>
       </article>
       <article className='flex flex-col m-auto mt-5'>
-        <h2 className='font-bold text-left md:text-center text-md md:text-4xl text-gray-700'>
+        <h2 className='font-bold text-left xl:text-center text-xl md:text-4xl text-gray-700'>
           ¿Cómo puedo autenticar mi identidad?
         </h2>
         <p className='font-bold text-gray-700 text-left mt-1'>

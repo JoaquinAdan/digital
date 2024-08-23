@@ -10,6 +10,7 @@ const Footer = () => {
           <p className='font-bold text-gray-700 hidden sm:block'>www.campana.gov.ar</p>
           <div className='bg-gray-600 h-[1px] w-full mt-[-5px]' />
         </NavLink>
+        <div className='absolute xl:hidden right-2 w-5 h-5 bg-red-400 rounded-full'>a</div>
       </div>
       <div
         style={{

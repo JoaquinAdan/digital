@@ -29,7 +29,7 @@ export function DateRangeInput({ date, setDate }: Props) {
           <Button
             id='date'
             variant={'outline'}
-            className={cn('w-full sm:w-[300px] justify-start text-left font-normal', !date && 'text-muted-foreground')}
+            className={cn('w-full sm:w-[300px] justify-start text-left font-normal capitalize', !date && 'text-muted-foreground')}
           >
             <CalendarDays className='mr-2 h-4 w-4' />
             {date?.from ? (

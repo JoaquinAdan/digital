@@ -13,7 +13,7 @@ const AppLayout = ({ children, title, description, adminPath }: Props) => {
   return (
     <div className='w-full'>
       <div className='flex w-full justify-between items-center'>
-        <div>
+        <div className='px-3'>
           <h1 color='blue-gray' className='flex text-lg items-center font-bold'>
             {title}
           </h1>

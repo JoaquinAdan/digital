@@ -17,7 +17,7 @@ const NavMenu = () => {
   }
 
   return (
-    <ul className='grid w-[1000px] gap-3 p-0 xl:p-4 xl:grid-cols-3'>
+    <ul className='grid xl:w-[1000px] gap-3 p-0 xl:p-4 xl:grid-cols-3'>
       {navItems.map((component) => (
         <ListItem
           key={component.title}

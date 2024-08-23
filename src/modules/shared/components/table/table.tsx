@@ -14,6 +14,7 @@ type TableSharedProps<T> = {
   date: DateRange | undefined
   setDate: (date: DateRange | undefined) => void
   totalPages: number
+  filterBy: string
   table: TableProps<T>
 }
 
@@ -26,6 +27,7 @@ export default function TableShared<T>({
   table,
   date,
   setDate,
+  filterBy,
 }: TableSharedProps<T>) {
   return (
     <div className='w-full pb-4'>
@@ -34,12 +36,12 @@ export default function TableShared<T>({
           filterValue={filterValue}
           setFilterValue={setFilterValue}
           table={table}
-          type={filterType}
+          filterType={filterType}
+          filterBy={filterBy}
           totalPages={totalPages}
           date={date}
           setDate={setDate}
         />
-        {/* <Columns />*/}
       </div>
       <div className='rounded-md border'>
         <Table>
