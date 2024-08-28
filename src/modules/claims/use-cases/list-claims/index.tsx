@@ -6,9 +6,10 @@ import { Claim } from '../../dto/claim.dto'
 import { columns } from '../../components/columns'
 import { FilterDto } from '@/modules/shared/models/filter'
 import TableShared from '@/modules/shared/components/table/table'
+import CreateClaim from '../create-claim'
 
 export default function TableClaims() {
-  const [filters, setFilters] = React.useState<FilterDto>({ page: 1, limit: 10 } as FilterDto)
+  const [filters, setFilters] = React.useState<FilterDto>({ page: 1, limit: 10 })
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
@@ -20,20 +21,28 @@ export default function TableClaims() {
     value: '',
     label: '',
   })
+  const [claimsData, setClaimsData] = React.useState<Claim[]>([
+    {
+      id: 1,
+      title: 'title',
+      observation: 'observation',
+      neighborhood: 'neighborhood',
+    },
+  ])
 
   const queryClient = useQueryClient()
   const data = {
-    data: [],
+    data: claimsData,
     count: 5,
     totalPages: 1,
   }
 
   const table = useReactTable({
-    data: (data as { data: Claim[] })?.data || [],
+    data: data?.data || [],
     columns,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
-    rowCount: (data as { count: number })?.count,
+    rowCount: data?.count,
     onPaginationChange: setPagination,
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -71,14 +80,7 @@ export default function TableClaims() {
   useEffect(() => {
     setFilters((prev) => ({
       ...prev,
-      sortField:
-        sorting[0]?.id === 'area'
-          ? 'areaId'
-          : sorting[0]?.id === 'event'
-          ? 'eventId'
-          : sorting[0]?.id === 'wasResolved'
-          ? 'resolved'
-          : sorting[0]?.id,
+      sortField: sorting[0]?.id,
       sortDirection: sorting[0]?.desc && sorting ? 'DESC' : 'ASC',
     }))
   }, [sorting])
@@ -89,12 +91,13 @@ export default function TableClaims() {
 
   return (
     <TableShared<Claim>
-      filterBy='id'
+      filterBy='title'
       columns={columns}
       filterType='claims'
       totalPages={data ? data.totalPages : 1}
       setFilterValue={setFilterValue}
       filterValue={filterValue}
+      createButton={<CreateClaim setClaimsData={setClaimsData} />}
       table={table}
       date={date}
       setDate={setDate}

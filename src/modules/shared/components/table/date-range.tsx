@@ -23,13 +23,16 @@ export function DateRangeInput({ date, setDate }: Props) {
   // }, [date, setFilterValue])
 
   return (
-    <div className='flex items-center gap-2'>
+    <div className='flex items-center gap-2 w-full sm:w-[300px]'>
       <Popover>
         <PopoverTrigger asChild>
           <Button
             id='date'
             variant={'outline'}
-            className={cn('w-full sm:w-[300px] justify-start text-left font-normal capitalize', !date && 'text-muted-foreground')}
+            className={cn(
+              'max-w-sm w-full justify-start text-left font-normal capitalize',
+              !date && 'text-muted-foreground'
+            )}
           >
             <CalendarDays className='mr-2 h-4 w-4' />
             {date?.from ? (

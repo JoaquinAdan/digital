@@ -13,34 +13,37 @@ type TableSharedProps<T> = {
   setFilterValue: (value: { type: string; value: string; label: string }) => void
   date: DateRange | undefined
   setDate: (date: DateRange | undefined) => void
+  createButton?: React.ReactElement
   totalPages: number
   filterBy: string
   table: TableProps<T>
 }
 
 export default function TableShared<T>({
-  columns,
-  filterType,
-  filterValue,
   setFilterValue,
+  setDate,
+  createButton,
+  filterValue,
   totalPages,
+  filterType,
+  filterBy,
+  columns,
   table,
   date,
-  setDate,
-  filterBy,
 }: TableSharedProps<T>) {
   return (
     <div className='w-full pb-4'>
       <div className='flex items-center pb-4'>
         <Filter
-          filterValue={filterValue}
           setFilterValue={setFilterValue}
-          table={table}
-          filterType={filterType}
-          filterBy={filterBy}
-          totalPages={totalPages}
-          date={date}
           setDate={setDate}
+          createButton={createButton}
+          filterValue={filterValue}
+          filterType={filterType}
+          totalPages={totalPages}
+          filterBy={filterBy}
+          table={table}
+          date={date}
         />
       </div>
       <div className='rounded-md border'>

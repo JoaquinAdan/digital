@@ -20,7 +20,7 @@ export default function Searcher<T>({ table, totalPages, setFilterValue: setFilt
           ? table.getColumn(filterBy)?.setFilterValue(event.target.value)
           : setFilter({ type: filterBy, value: event.target.value, label: '' })
       }
-      className='max-w-sm'
+      className='max-w-sm w-full sm:w-[300px]'
     />
   )
 }

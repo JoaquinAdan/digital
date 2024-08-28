@@ -58,6 +58,15 @@
     --chart-5: 340 75% 55%;
   }
 }
+html {
+  scroll-behavior: smooth;
+}
+
+textarea {
+  resize: none;
+  field-sizing: content;
+  max-height: 200px;
+}
 
 @layer base {
   * {

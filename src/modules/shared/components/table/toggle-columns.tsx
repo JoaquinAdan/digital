@@ -34,7 +34,7 @@ export default function ToggleColumns<T>({ table, filterType }: { table: Table<T
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='outline' className='ml-auto text-gray-700 capitalize'>
+        <Button variant='outline' className='text-gray-700 capitalize'>
           Columnas activas <ChevronDown className='ml-2 h-4 w-4' />
         </Button>
       </DropdownMenuTrigger>
