@@ -9,7 +9,7 @@ export const columns: ColumnDef<Claim>[] = [
     header: 'Acciones',
     enableHiding: false,
     cell: ({ row }) => {
-      return <Actions id={row.original.id } />
+      return <Actions id={row.original.id} />
     },
   },
   {

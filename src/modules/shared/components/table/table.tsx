@@ -14,7 +14,7 @@ type TableSharedProps<T> = {
   date: DateRange | undefined
   columns: ColumnDef<T>[]
   table: TableProps<T>
-  haveActions: boolean
+  haveActions?: boolean
   filterType: string
   totalPages: number
   filterBy: string
@@ -24,7 +24,7 @@ export default function TableShared<T>({
   setFilterValue,
   setDate,
   createButton,
-  haveActions,
+  haveActions = false,
   filterValue,
   totalPages,
   filterType,
@@ -34,7 +34,7 @@ export default function TableShared<T>({
   date,
 }: TableSharedProps<T>) {
   return (
-    <div className='w-full pb-4'>
+    <div className='w-full pb-4 cursor-auto'>
       <div className='flex items-center pb-4'>
         <Filter
           setFilterValue={setFilterValue}
@@ -50,7 +50,7 @@ export default function TableShared<T>({
       </div>
       <div className='rounded-md border'>
         <Table>
-          <TableHeader className='bg-gray-50 cursor-auto'>
+          <TableHeader className='bg-gray-50'>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header, i) => {

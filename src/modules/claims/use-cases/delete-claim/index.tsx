@@ -15,18 +15,18 @@ const DeleteClaim = ({ id }: { id?: number }) => {
   }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Tooltip>
-          <TooltipTrigger asChild>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <DialogTrigger asChild>
             <Button size='icon' variant='outline' onClick={() => setOpen(true)}>
               <Trash2 className='h-4 w-4' />
             </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Eliminar</p>
-          </TooltipContent>
-        </Tooltip>
-      </DialogTrigger>
+          </DialogTrigger>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Eliminar</p>
+        </TooltipContent>
+      </Tooltip>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Eliminar reclamo</DialogTitle>

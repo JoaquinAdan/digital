@@ -1,4 +1,4 @@
-import { ArrowUpFromDot } from 'lucide-react'
+import { ArrowUp } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
 const Footer = () => {
@@ -8,7 +8,7 @@ const Footer = () => {
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         className='fixed cursor-pointer right-2 bottom-2 w-6 h-6 grid place-items-center bg-white border-2 border-purple-700 rounded-full'
       >
-        <ArrowUpFromDot className='h-5 w-5 text-purple-700' />
+        <ArrowUp className='h-5 w-5 text-purple-700' />
       </div>
       <div className='mt-2 mb-1 flex justify-center'>
         <p className='font-bold text-gray-700'>Copyright © {new Date().getFullYear()}</p>

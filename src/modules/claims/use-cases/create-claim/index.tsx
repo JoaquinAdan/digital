@@ -45,9 +45,11 @@ const CreateClaim = () => {
       neighborhood: '',
     },
   })
-  const lastClaimId = claimsData[claimsData.length - 1].id
+
+  const lastClaimId = claimsData[claimsData.length - 1]?.id ?? 0
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setClaimsData({ ...values, id: lastClaimId ? lastClaimId + 1 : 0 })
+    setClaimsData({ ...values, id: lastClaimId + 1 })
     form.reset()
     setOpen(false)
     onSuccess()
