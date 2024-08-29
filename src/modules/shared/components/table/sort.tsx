@@ -11,8 +11,8 @@ type Props<T> = {
 export default function Sort<T>({ column, name }: Props<T>) {
   const isSorted = column.getIsSorted()
   return (
-    <div className='flex items-center'>
-      <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+    <div className='flex justify-start w-full'>
+      <Button variant='ghost' className='pl-0' onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
         {name}
         {!isSorted && <ArrowDownUp className='ml-2 h-4 w-4' />}
         {(isSorted === 'asc' || isSorted === 'desc') && (

@@ -1,5 +1,5 @@
 export interface Claim {
-  id: number
+  id?: number
   title: string
   observation: string
   neighborhood: string

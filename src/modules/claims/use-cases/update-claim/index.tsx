@@ -1,15 +1,23 @@
-import { DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/modules/shared/components/ui/dialog'
-import { Dialog, DialogContent, DialogDescription } from '@/modules/shared/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/modules/shared/components/ui/dialog'
+import { Form } from '@/modules/shared/components/ui/form'
 import { toast } from '@/modules/shared/components/ui/use-toast'
 import { Button } from '@/modules/shared/components/ui/button'
-import { Form } from '@/modules/shared/components/ui/form'
-import { useClaimsStore } from '../../stores/mock-store'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { zodResolver } from '@hookform/resolvers/zod'
-import ClaimForm from '../../components/form'
+import { Pencil } from 'lucide-react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { Plus } from 'lucide-react'
-import React from 'react'
 import { z } from 'zod'
+import ClaimForm from '../../components/form'
+import { useClaimsStore } from '../../stores/mock-store'
 
 const formSchema = z.object({
   title: z.string().min(1, 'Debes escribir un titulo para el reclamo'),
@@ -17,9 +25,9 @@ const formSchema = z.object({
   neighborhood: z.string().min(1, 'Debes escribir un barrio'),
 })
 
-const CreateClaim = () => {
+const UpdateClaim = ({ id }: { id?: number }) => {
   // hardcode
-  const { setClaimsData, claimsData } = useClaimsStore()
+  const { updateClaimsData, getClaimById } = useClaimsStore()
   const [open, setOpen] = React.useState(false)
   // const onError = () => {
   //   toast({
@@ -31,8 +39,8 @@ const CreateClaim = () => {
 
   const onSuccess = () => {
     toast({
-      title: 'Reclamo registrado',
-      description: 'El reclamo ha sido registrado con exito',
+      title: 'Reclamo actualizado',
+      description: 'El reclamo ha sido actualizado con exito',
       variant: 'success',
     })
   }
@@ -45,25 +53,36 @@ const CreateClaim = () => {
       neighborhood: '',
     },
   })
-  const lastClaimId = claimsData[claimsData.length - 1].id
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setClaimsData({ ...values, id: lastClaimId ? lastClaimId + 1 : 0 })
+    updateClaimsData({ ...values, id })
     form.reset()
     setOpen(false)
     onSuccess()
   }
+  console.log(getClaimById(id))
+
+  useEffect(() => {
+    form.reset(getClaimById(id))
+  }, [id, getClaimById, form])
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant='outline'>
-          <Plus className='h-4 w-4 mr-1 mb-[2px]' />
-          Crear
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button size='icon' variant='outline' onClick={() => setOpen(true)}>
+              <Pencil className='h-4 w-4' />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Editar</p>
+          </TooltipContent>
+        </Tooltip>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Crear reclamo</DialogTitle>
-          <DialogDescription>Genere reclamo para visualizar y administrar.</DialogDescription>
+          <DialogTitle>Editar reclamo #{id}</DialogTitle>
+          <DialogDescription>Edite reclamo para visualizar y administrar.</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -80,4 +99,4 @@ const CreateClaim = () => {
   )
 }
 
-export default CreateClaim
+export default UpdateClaim

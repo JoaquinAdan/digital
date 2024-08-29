@@ -5,7 +5,7 @@ import { Button } from '../ui/button'
 
 export default function Pagination<T>({ table }: { table: Table<T> }) {
   return (
-    <div className='flex items-center space-x-6 lg:space-x-8 justify-between mt-2'>
+    <div className='flex items-center cursor-auto space-x-6 lg:space-x-8 justify-between mt-2'>
       <div className='flex items-center space-x-2'>
         <p className='text-sm font-medium'>Filas por página</p>
         <Select

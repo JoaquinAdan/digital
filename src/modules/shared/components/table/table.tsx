@@ -7,22 +7,24 @@ import Filter from './filter'
 import Pagination from './pagination'
 
 type TableSharedProps<T> = {
-  columns: ColumnDef<T>[]
-  filterType: string
-  filterValue: { type: string; value: string; label: string }
   setFilterValue: (value: { type: string; value: string; label: string }) => void
-  date: DateRange | undefined
+  filterValue: { type: string; value: string; label: string }
   setDate: (date: DateRange | undefined) => void
   createButton?: React.ReactElement
+  date: DateRange | undefined
+  columns: ColumnDef<T>[]
+  table: TableProps<T>
+  haveActions: boolean
+  filterType: string
   totalPages: number
   filterBy: string
-  table: TableProps<T>
 }
 
 export default function TableShared<T>({
   setFilterValue,
   setDate,
   createButton,
+  haveActions,
   filterValue,
   totalPages,
   filterType,
@@ -48,12 +50,15 @@ export default function TableShared<T>({
       </div>
       <div className='rounded-md border'>
         <Table>
-          <TableHeader className='bg-gray-50'>
+          <TableHeader className='bg-gray-50 cursor-auto'>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
+                {headerGroup.headers.map((header, i) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      key={header.id}
+                      className={`border-l-[1px] border-gray-100 ${haveActions && 0 === i ? 'w-40' : 'w-auto'}`}
+                    >
                       {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                     </TableHead>
                   )
@@ -66,7 +71,7 @@ export default function TableShared<T>({
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className='py-2'>
+                    <TableCell key={cell.id} className='py-2 border-l-[1px] border-gray-100'>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
@@ -74,7 +79,7 @@ export default function TableShared<T>({
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns?.length} className='h-24 text-center'>
+                <TableCell colSpan={columns?.length} className='text-center'>
                   Sin resultados.
                 </TableCell>
               </TableRow>

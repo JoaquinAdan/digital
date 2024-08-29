@@ -9,8 +9,7 @@ export const columns: ColumnDef<Claim>[] = [
     header: 'Acciones',
     enableHiding: false,
     cell: ({ row }) => {
-      console.log(row)
-      return <Actions id={row.original.id} />
+      return <Actions id={row.original.id } />
     },
   },
   {

@@ -7,8 +7,11 @@ import { columns } from '../../components/columns'
 import { FilterDto } from '@/modules/shared/models/filter'
 import TableShared from '@/modules/shared/components/table/table'
 import CreateClaim from '../create-claim'
+import { useClaimsStore } from '../../stores/mock-store'
 
 export default function TableClaims() {
+  // hardcode
+  const { claimsData } = useClaimsStore()
   const [filters, setFilters] = React.useState<FilterDto>({ page: 1, limit: 10 })
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [pagination, setPagination] = React.useState({
@@ -21,14 +24,6 @@ export default function TableClaims() {
     value: '',
     label: '',
   })
-  const [claimsData, setClaimsData] = React.useState<Claim[]>([
-    {
-      id: 1,
-      title: 'title',
-      observation: 'observation',
-      neighborhood: 'neighborhood',
-    },
-  ])
 
   const queryClient = useQueryClient()
   const data = {
@@ -91,16 +86,17 @@ export default function TableClaims() {
 
   return (
     <TableShared<Claim>
-      filterBy='title'
-      columns={columns}
-      filterType='claims'
       totalPages={data ? data.totalPages : 1}
       setFilterValue={setFilterValue}
+      createButton={<CreateClaim />}
       filterValue={filterValue}
-      createButton={<CreateClaim setClaimsData={setClaimsData} />}
+      filterType='claims'
+      haveActions={true}
+      columns={columns}
+      setDate={setDate}
+      filterBy='title'
       table={table}
       date={date}
-      setDate={setDate}
     />
   )
 }

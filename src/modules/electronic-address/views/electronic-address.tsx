@@ -5,9 +5,9 @@ import { Button } from '@/modules/shared/components/ui/button'
 const ElectronicAddress = () => {
   return (
     <div className='flex flex-col px-3'>
-      <article className='flex flex-col gap-2 items-centerw-full lg:mt-5'>
+      <article className='flex flex-col gap-2 items-centerw-full lg:mt-16'>
         <div className='flex justify-between'>
-          <div className='flex flex-col gap-1 md:gap-3 justify-center items-start h-full w-full'>
+          <div className='flex flex-col gap-1 md:gap-3 justify-start items-start h-full w-full'>
             <h1 className='font-bold  text-xl md:text-4xl lg:text-5xl text-gray-700'>
               Plataforma de dirección electronica fiscal
             </h1>
@@ -25,7 +25,7 @@ const ElectronicAddress = () => {
           <img className='hidden lg:block' src={purplesvg} alt='svg sobre personas conectando' />
         </div>
       </article>
-      <article className='flex flex-col m-auto mt-5'>
+      <article className='flex flex-col m-auto mt-5 md:mt-16'>
         <h2 className='font-bold text-left xl:text-center text-xl md:text-4xl text-gray-700'>
           ¿Cómo puedo autenticar mi identidad?
         </h2>
