@@ -16,6 +16,10 @@ export const useClaimsStore = create<ClaimStore>((set) => ({
       title: 'title',
       observation: 'observation',
       neighborhood: 'neighborhood',
+      coordinates: {
+        latitude: -34.160429,
+        longitude: -58.959286,
+      },
     },
   ],
   setClaimsData: (claim: Claim) =>

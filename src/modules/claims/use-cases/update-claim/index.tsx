@@ -18,11 +18,20 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import ClaimForm from '../../components/form'
 import { useClaimsStore } from '../../stores/mock-store'
+import { defaultLocation } from '@/configs/constants/default-location'
 
 const formSchema = z.object({
   title: z.string().min(1, 'Debes escribir un titulo para el reclamo'),
   observation: z.string().min(1, 'Debes escribir una observación para el reclamo'),
   neighborhood: z.string().min(1, 'Debes escribir un barrio'),
+  coordinates: z
+    .object({
+      latitude: z.number(),
+      longitude: z.number(),
+    })
+    .refine((coords) => !(coords.latitude === defaultLocation[0] && coords.longitude === defaultLocation[1]), {
+      message: 'Las coordenadas específicas no están permitidas.',
+    }),
 })
 
 const UpdateClaim = ({ id }: { id?: number }) => {
@@ -51,6 +60,10 @@ const UpdateClaim = ({ id }: { id?: number }) => {
       title: '',
       observation: '',
       neighborhood: '',
+      coordinates: {
+        latitude: defaultLocation[0],
+        longitude: defaultLocation[1],
+      },
     },
   })
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -59,11 +72,14 @@ const UpdateClaim = ({ id }: { id?: number }) => {
     setOpen(false)
     onSuccess()
   }
-  console.log(getClaimById(id))
 
   useEffect(() => {
     form.reset(getClaimById(id))
   }, [id, getClaimById, form])
+
+  useEffect(() => {
+    form.reset()
+  }, [open, form])
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -79,7 +95,7 @@ const UpdateClaim = ({ id }: { id?: number }) => {
           <p>Editar</p>
         </TooltipContent>
       </Tooltip>
-      <DialogContent>
+      <DialogContent className='overflow-auto max-h-[90svh] p-2 sm:p-6'>
         <DialogHeader>
           <DialogTitle>Editar reclamo #{id}</DialogTitle>
           <DialogDescription>Edite reclamo para visualizar y administrar.</DialogDescription>
