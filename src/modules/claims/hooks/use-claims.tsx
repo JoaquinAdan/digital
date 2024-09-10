@@ -6,11 +6,10 @@ export const GET_CLAIMS = 'GET_CLAIMS'
 
 export const useClaims = (filters: FilterDto) => {
   const token = ''
-  const pokemon = useQuery<any>({
+  const claims = useQuery<any>({
     queryKey: [GET_CLAIMS, filters],
     queryFn: () => getClaimsHttp(token, filters),
-    refetchOnWindowFocus: false,
   })
 
-  return pokemon
+  return claims
 }

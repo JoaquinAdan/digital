@@ -16,6 +16,9 @@ const formSchema = z.object({
   title: z.string().min(1, 'Debes escribir un titulo para el reclamo'),
   observation: z.string().min(1, 'Debes escribir una observación para el reclamo'),
   neighborhood: z.string().min(1, 'Debes escribir un barrio'),
+  claimType: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
+  serviceArea: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
+  origin: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
   coordinates: z
     .object({
       latitude: z.number(),
@@ -52,12 +55,16 @@ const CreateClaim = () => {
       title: '',
       observation: '',
       neighborhood: '',
+      claimType: '',
+      origin: '',
+      serviceArea: '',
       coordinates: {
         latitude: defaultLocation[0],
         longitude: defaultLocation[1],
       },
     },
   })
+  console.log(form.watch())
 
   const lastClaimId = claimsData[claimsData.length - 1]?.id ?? 0
 
