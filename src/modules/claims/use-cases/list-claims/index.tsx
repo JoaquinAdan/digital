@@ -8,16 +8,19 @@ import { FilterDto } from '@/modules/shared/models/filter'
 import TableShared from '@/modules/shared/components/table/table'
 import CreateClaim from '../create-claim'
 import { useClaimsStore } from '../../stores/mock-store'
+import { useClaims } from '../../hooks/use-claims'
 
 export default function TableClaims() {
-  // hardcode
-  const { claimsData } = useClaimsStore()
   const [filters, setFilters] = React.useState<FilterDto>({ page: 1, limit: 10 })
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
     pageSize: 10,
   })
+  const claims = useClaims(filters)
+  // hardcode
+  const { claimsData } = useClaimsStore()
+
   const [date, setDate] = React.useState<DateRange | undefined>()
   const [filterValue, setFilterValue] = React.useState<{ type: string; value: string; label: string }>({
     type: '',
