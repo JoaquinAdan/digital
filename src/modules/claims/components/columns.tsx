@@ -1,35 +1,66 @@
 import Sort from '@/modules/shared/components/table/sort'
 import { ColumnDef } from '@tanstack/react-table'
-import { Claim } from '../models/claim'
 import Actions from './actions'
+import { Badge } from '@/modules/shared/components/ui/badge'
+import { ClaimViewModel } from '../models/claims-view-model'
 
-export const columns: ColumnDef<Claim>[] = [
+export const columns: ColumnDef<ClaimViewModel>[] = [
   {
     id: 'actions',
     header: 'Acciones',
     enableHiding: false,
     cell: ({ row }) => {
-      return <Actions id={row.original.id} />
+      return <Actions id={row.original.uuid} />
     },
   },
   {
-    accessorKey: 'id',
-    header: ({ column }) => <Sort column={column} name='ID' />,
-    cell: ({ row }) => <>#{row.getValue('id')}</>,
+    accessorKey: 'numero',
+    header: ({ column }) => <Sort column={column} name='N°' />,
+    cell: ({ row }) => <>{String(row.getValue('numero'))}</>,
   },
   {
-    accessorKey: 'title',
-    header: ({ column }) => <Sort column={column} name='Título' />,
-    cell: ({ row }) => <>{row.getValue('title')}</>,
+    accessorKey: 'estado',
+    header: ({ column }) => <Sort column={column} name='Estado' />,
+    cell: ({ row }) => (
+      <Badge variant={row.getValue('estado') === 1 ? 'outline' : row.getValue('estado') === 2 ? 'default' : 'destructive'}>
+        {row.getValue('estado') === 1 ? 'Pendiente' : row.getValue('estado') === 2 ? 'Autorizado' : 'Rechazado'}
+      </Badge>
+    ),
   },
   {
-    accessorKey: 'neighborhood',
-    header: ({ column }) => <Sort column={column} name='Barrio' />,
-    cell: ({ row }) => <>{row.getValue('neighborhood')}</>,
+    accessorKey: 'vecino',
+    header: ({ column }) => <Sort column={column} name='Vecino' />,
+    cell: ({ row }) => <>{row.getValue('vecino')}</>,
   },
   {
-    accessorKey: 'observation',
+    accessorKey: 'fecha de creación',
+    header: ({ column }) => <Sort column={column} name='Fecha de creación' />,
+    cell: ({ row }) => <>{new Date(row.getValue('fecha de creación')).toLocaleDateString()}</>,
+  },
+  {
+    accessorKey: 'prioridad',
+    header: ({ column }) => <Sort column={column} name='Prioridad' />,
+    cell: ({ row }) => <>{row.getValue('prioridad')}</>,
+  },
+  {
+    accessorKey: 'area de servicio',
+    header: ({ column }) => <Sort column={column} name='areaServicio' />,
+    cell: ({ row }) => <>{row.getValue('areaServicio')}</>,
+  },
+  {
+    accessorKey: 'origen',
+    header: ({ column }) => <Sort column={column} name='Origen' />,
+    cell: ({ row }) => <>{row.getValue('origen')}</>,
+  },
+  {
+    accessorKey: 'tipo de incidente',
+    header: ({ column }) => <Sort column={column} name='Tipo de incidente' />,
+    cell: ({ row }) => <>{row.getValue('tipo de incidente')}</>,
+  },
+
+  {
+    accessorKey: 'observaciones',
     header: ({ column }) => <Sort column={column} name='Observación' />,
-    cell: ({ row }) => <>{row.getValue('observation')}</>,
+    cell: ({ row }) => <>{row.getValue('observaciones')}</>,
   },
 ]

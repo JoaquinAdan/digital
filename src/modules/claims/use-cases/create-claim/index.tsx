@@ -3,7 +3,6 @@ import { Dialog, DialogContent, DialogDescription } from '@/modules/shared/compo
 import { toast } from '@/modules/shared/components/ui/use-toast'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Form } from '@/modules/shared/components/ui/form'
-import { useClaimsStore } from '../../stores/mock-store'
 import { zodResolver } from '@hookform/resolvers/zod'
 import ClaimForm from '../../components/form'
 import { useForm } from 'react-hook-form'
@@ -11,14 +10,17 @@ import { Plus } from 'lucide-react'
 import React, { useEffect } from 'react'
 import { z } from 'zod'
 import { defaultLocation } from '@/configs/constants/default-location'
+import { claimDefaultValue } from '../../models/claim-default-value'
+
+// Rest of the code...
+import { ClaimFormDto } from '../../dto/claim-form'
 
 const formSchema = z.object({
-  title: z.string().min(1, 'Debes escribir un titulo para el reclamo'),
-  observation: z.string().min(1, 'Debes escribir una observación para el reclamo'),
-  neighborhood: z.string().min(1, 'Debes escribir un barrio'),
-  claimType: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
-  serviceArea: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
-  origin: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
+  ciudadanoId: z.string().min(1, 'Debes escribir un titulo para el reclamo'),
+  observaciones: z.string().min(1, 'Debes escribir una observación para el reclamo'),
+  tipoIncidente: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
+  areaServicio: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
+  origen: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
   coordinates: z
     .object({
       latitude: z.number(),
@@ -31,7 +33,6 @@ const formSchema = z.object({
 
 const CreateClaim = () => {
   // hardcode
-  const { setClaimsData, claimsData } = useClaimsStore()
   const [open, setOpen] = React.useState(false)
   // const onError = () => {
   //   toast({
@@ -49,28 +50,14 @@ const CreateClaim = () => {
     })
   }
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<ClaimFormDto>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      title: '',
-      observation: '',
-      neighborhood: '',
-      claimType: '',
-      origin: '',
-      serviceArea: '',
-      coordinates: {
-        latitude: defaultLocation[0],
-        longitude: defaultLocation[1],
-      },
-    },
+    defaultValues: claimDefaultValue,
   })
-  console.log(form.watch())
 
-  const lastClaimId = claimsData[claimsData.length - 1]?.id ?? 0
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: ClaimFormDto) {
+    console.log(values)
     form.reset()
-    setClaimsData({ ...values, id: lastClaimId + 1 })
     setOpen(false)
     onSuccess()
   }

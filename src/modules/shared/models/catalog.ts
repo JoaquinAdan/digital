@@ -1,4 +1,4 @@
-export default interface ClaimsCatalog {
+export default interface Catalog {
   id: number
   descripcion: string
   areaServicioId: number

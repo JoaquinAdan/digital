@@ -5,7 +5,7 @@ import { userMock } from '@/mocks/user'
 
 const useAuth = () => {
   const [isLoadingLogin, setIsLoadingLogin] = useState(false)
-  const { user, setUser } = useAuthStore()
+  const { user, setUser, token } = useAuthStore()
 
   const login = async (): Promise<User | null> => {
     localStorage.setItem('user', JSON.stringify(userMock))
@@ -23,7 +23,7 @@ const useAuth = () => {
     setUser(null)
   }
 
-  return { login, user, logout, isLoadingLogin }
+  return { login, user, logout, isLoadingLogin, token }
 }
 
 export default useAuth

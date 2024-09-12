@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router'
 import DeleteClaim from '../use-cases/delete-claim'
 import UpdateClaim from '../use-cases/update-claim'
 
-export default function Actions({ id }: { id?: number }) {
+export default function Actions({ id }: { id?: string }) {
   // hardcode
   const navigate = useNavigate()
 

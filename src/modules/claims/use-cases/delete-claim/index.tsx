@@ -1,16 +1,20 @@
-import { DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/modules/shared/components/ui/dialog'
-import { Dialog, DialogContent, DialogDescription } from '@/modules/shared/components/ui/dialog'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { Button } from '@/modules/shared/components/ui/button'
-import { useClaimsStore } from '../../stores/mock-store'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/modules/shared/components/ui/dialog'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { Trash2 } from 'lucide-react'
 import React from 'react'
 
-const DeleteClaim = ({ id }: { id?: number }) => {
+const DeleteClaim = ({ id }: { id?: string }) => {
   const [open, setOpen] = React.useState(false)
-  const { removeClaimsData } = useClaimsStore()
   const removeClaim = () => {
-    removeClaimsData(id)
     setOpen(false)
   }
   return (

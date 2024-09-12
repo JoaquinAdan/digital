@@ -7,15 +7,15 @@ interface Props {
   returnPath?: string
   description?: string
   children: ReactNode
-  adminPath?: string
+  actionButton?: React.ReactNode
   title?: string
 }
 
-const AppLayout = ({ children, title, description, adminPath, returnPath }: Props) => {
+const AppLayout = ({ children, title, description, actionButton, returnPath }: Props) => {
   return (
     <div className='w-full'>
-      <div className=' w-full justify-between items-center'>
-        <div className='px-3'>
+      <div className='flex w-full justify-between items-start px-3'>
+        <div>
           <div className='flex'>
             <h1 color='blue-gray' className='flex text-lg items-center font-bold'>
               {title}
@@ -31,14 +31,7 @@ const AppLayout = ({ children, title, description, adminPath, returnPath }: Prop
           )}
           {!returnPath && <p className='text-md font-medium text-blue-gray-500'>{description}</p>}
         </div>
-
-        {adminPath && (
-          <Link to={adminPath}>
-            <Button color='purple' size='sm'>
-              Admin
-            </Button>
-          </Link>
-        )}
+        {actionButton && actionButton}
       </div>
       <div className='mt-3 w-full'>{children}</div>
     </div>

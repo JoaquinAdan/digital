@@ -18,15 +18,15 @@ import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import ClaimForm from '../../components/form'
-import { useClaimsStore } from '../../stores/mock-store'
+import { claimDefaultValue } from '../../models/claim-default-value'
+import { ClaimFormDto } from '../../dto/claim-form'
 
 const formSchema = z.object({
-  title: z.string().min(1, 'Debes escribir un titulo para el reclamo'),
-  observation: z.string().min(1, 'Debes escribir una observación para el reclamo'),
-  neighborhood: z.string().min(1, 'Debes escribir un barrio'),
-  claimType: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
-  serviceArea: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
-  origin: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
+  ciudadanoId: z.string().min(1, 'Debes escribir un titulo para el reclamo'),
+  observaciones: z.string().min(1, 'Debes escribir una observación para el reclamo'),
+  tipoIncidente: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
+  areaServicio: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
+  origen: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
   coordinates: z
     .object({
       latitude: z.number(),
@@ -37,9 +37,8 @@ const formSchema = z.object({
     }),
 })
 
-const UpdateClaim = ({ id }: { id?: number }) => {
+const UpdateClaim = ({ id }: { id?: string }) => {
   // hardcode
-  const { updateClaimsData, getClaimById } = useClaimsStore()
   const [open, setOpen] = React.useState(false)
   // const onError = () => {
   //   toast({
@@ -57,30 +56,19 @@ const UpdateClaim = ({ id }: { id?: number }) => {
     })
   }
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<ClaimFormDto>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      title: '',
-      observation: '',
-      serviceArea: '',
-      claimType: '',
-      origin: '',
-      neighborhood: '',
-      coordinates: {
-        latitude: defaultLocation[0],
-        longitude: defaultLocation[1],
-      },
-    },
+    defaultValues: claimDefaultValue,
   })
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    updateClaimsData({ ...values, id })
+  async function onSubmit(values: ClaimFormDto) {
+    console.log(values)
     form.reset()
     setOpen(false)
     onSuccess()
   }
-  useEffect(() => {
-    form.reset(getClaimById(id))
-  }, [id, getClaimById, form])
+  // useEffect(() => {
+  //   form.reset(getClaimById(id))
+  // }, [id, getClaimById, form])
 
   useEffect(() => {
     form.reset()
