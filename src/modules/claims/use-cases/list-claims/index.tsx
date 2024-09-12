@@ -2,7 +2,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { SortingState, getCoreRowModel, getFilteredRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
 import React, { useEffect } from 'react'
 import type { DateRange } from 'react-day-picker'
-import { Claim } from '../../dto/claim.dto'
+import { Claim } from '../../models/claim'
 import { columns } from '../../components/columns'
 import { FilterDto } from '@/modules/shared/models/filter'
 import TableShared from '@/modules/shared/components/table/table'
@@ -10,14 +10,16 @@ import CreateClaim from '../create-claim'
 import { useClaimsStore } from '../../stores/mock-store'
 
 export default function TableClaims() {
-  // hardcode
-  const { claimsData } = useClaimsStore()
   const [filters, setFilters] = React.useState<FilterDto>({ page: 1, limit: 10 })
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
     pageSize: 10,
   })
+
+  // hardcode
+  const { claimsData } = useClaimsStore()
+
   const [date, setDate] = React.useState<DateRange | undefined>()
   const [filterValue, setFilterValue] = React.useState<{ type: string; value: string; label: string }>({
     type: '',

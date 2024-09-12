@@ -1,3 +1,5 @@
+import { defaultLocation } from '@/configs/constants/default-location'
+import { Button } from '@/modules/shared/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -8,9 +10,8 @@ import {
   DialogTrigger,
 } from '@/modules/shared/components/ui/dialog'
 import { Form } from '@/modules/shared/components/ui/form'
-import { toast } from '@/modules/shared/components/ui/use-toast'
-import { Button } from '@/modules/shared/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
+import { toast } from '@/modules/shared/components/ui/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Pencil } from 'lucide-react'
 import React, { useEffect } from 'react'
@@ -18,12 +19,14 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import ClaimForm from '../../components/form'
 import { useClaimsStore } from '../../stores/mock-store'
-import { defaultLocation } from '@/configs/constants/default-location'
 
 const formSchema = z.object({
   title: z.string().min(1, 'Debes escribir un titulo para el reclamo'),
   observation: z.string().min(1, 'Debes escribir una observación para el reclamo'),
   neighborhood: z.string().min(1, 'Debes escribir un barrio'),
+  claimType: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
+  serviceArea: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
+  origin: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
   coordinates: z
     .object({
       latitude: z.number(),
@@ -59,6 +62,9 @@ const UpdateClaim = ({ id }: { id?: number }) => {
     defaultValues: {
       title: '',
       observation: '',
+      serviceArea: '',
+      claimType: '',
+      origin: '',
       neighborhood: '',
       coordinates: {
         latitude: defaultLocation[0],
@@ -72,7 +78,6 @@ const UpdateClaim = ({ id }: { id?: number }) => {
     setOpen(false)
     onSuccess()
   }
-
   useEffect(() => {
     form.reset(getClaimById(id))
   }, [id, getClaimById, form])

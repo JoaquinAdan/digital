@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { Claim } from '../dto/claim.dto'
+import { Claim } from '../models/claim'
 
 interface ClaimStore {
   getClaimById: (id?: number) => Claim | undefined
@@ -16,6 +16,8 @@ export const useClaimsStore = create<ClaimStore>((set) => ({
       title: 'title',
       observation: 'observation',
       neighborhood: 'neighborhood',
+      claimType: 'claimType',
+      serviceArea: 'serviceArea',
       coordinates: {
         latitude: -34.160429,
         longitude: -58.959286,

@@ -1,6 +1,6 @@
 import Sort from '@/modules/shared/components/table/sort'
 import { ColumnDef } from '@tanstack/react-table'
-import { Claim } from '../dto/claim.dto'
+import { Claim } from '../models/claim'
 import Actions from './actions'
 
 export const columns: ColumnDef<Claim>[] = [
