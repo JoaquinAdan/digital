@@ -8,11 +8,11 @@ const NavMenu = () => {
 
   let navItems = publicItems
   if (user) {
-    const scopes = user.roles.flatMap((role) => role.permissions.map((permission) => permission.scope))
-    const hasWildcard = scopes.includes('*')
+    const scopes = user?.roles?.flatMap((role) => role.permissions.map((permission) => permission.scope))
+    const hasWildcard = scopes?.includes('*')
     const filteredArray = hasWildcard
       ? protectedItems
-      : protectedItems.filter((item) => scopes.some((scope) => item.href.includes(scope)))
+      : protectedItems.filter((item) => scopes?.some((scope) => item.href.includes(scope)))
     navItems = [...navItems, ...filteredArray]
   }
 

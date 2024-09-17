@@ -13,7 +13,9 @@ const ClaimDetail = () => {
   const { data, isLoading } = useClaim(id as string)
   const { user } = useAuth()
   const canAuthorize = user?.roles.some((role) =>
-    role.permissions.some((permission) => permission.action === 'authorize' && permission.scope === 'reclamos')
+    role.permissions.some(
+      (permission) => (permission.action === 'authorize' || permission.action === '*') && permission.scope === 'reclamos'
+    )
   )
 
   return (
