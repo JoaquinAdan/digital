@@ -1,6 +1,5 @@
 import { DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/modules/shared/components/ui/dialog'
 import { Dialog, DialogContent, DialogDescription } from '@/modules/shared/components/ui/dialog'
-import { toast } from '@/modules/shared/components/ui/use-toast'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Form } from '@/modules/shared/components/ui/form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -14,6 +13,7 @@ import { claimDefaultValue } from '../../models/claim-default-value'
 
 // Rest of the code...
 import { ClaimFormDto } from '../../dto/claim-form'
+import toast from 'react-hot-toast'
 
 const formSchema = z.object({
   ciudadanoId: z.string().min(1, 'Debes escribir un titulo para el reclamo'),
@@ -43,11 +43,7 @@ const CreateClaim = () => {
   // }
 
   const onSuccess = () => {
-    toast({
-      title: 'Reclamo registrado',
-      description: 'El reclamo ha sido registrado con exito',
-      variant: 'success',
-    })
+    toast.success('El reclamo ha sido registrado con exito')
   }
 
   const form = useForm<ClaimFormDto>({
@@ -55,7 +51,7 @@ const CreateClaim = () => {
     defaultValues: claimDefaultValue,
   })
 
-  async function onSubmit(values: ClaimFormDto) {
+  const onSubmit = (values: ClaimFormDto) => {
     console.log(values)
     form.reset()
     setOpen(false)

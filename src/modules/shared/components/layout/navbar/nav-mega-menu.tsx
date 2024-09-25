@@ -1,4 +1,4 @@
-import logo from '@/assets/logo.png'
+import logo from '@/assets/shared/logo-muni.png'
 import useBreakpoint from '@/modules/shared/hooks/use-breakpoints'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/modules/shared/components/ui/accordion'
 import { Button } from '@/modules/shared/components/ui/button'

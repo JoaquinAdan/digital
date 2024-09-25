@@ -1,12 +1,12 @@
 import { RouteObject } from 'react-router'
+import { LoginView } from './imports'
 
 export const authRoutes: RouteObject = {
   path: '/auth',
-  element: <></>,
   children: [
     {
       path: 'login',
-      element: <></>,
+      element: <LoginView />,
     },
     {
       path: 'logout',
