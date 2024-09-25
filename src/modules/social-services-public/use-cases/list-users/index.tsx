@@ -7,7 +7,7 @@ import { FilterDto } from '@/modules/shared/models/filter'
 import TableShared from '@/modules/shared/components/table/table'
 import { Social } from '../../dto/social.dto'
 
-export default function TableAdminForms() {
+export default function TableVisitorsForms() {
   const [filters, setFilters] = React.useState<FilterDto>({ page: 1, limit: 10 } as FilterDto)
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [pagination, setPagination] = React.useState({

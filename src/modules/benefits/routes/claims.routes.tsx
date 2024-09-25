@@ -1,10 +1,11 @@
 import ProtectedRoute from '@/modules/shared/components/routes/protected-route'
 import DefaultLayout from '@/modules/shared/components/layout/default-layout'
 import { RouteObject } from 'react-router'
-import { SocialServicesView } from './imports'
+import { ClaimsView } from './imports'
+import ClaimDetail from '../views/claim-detail'
 
-export const socialServicesRoutes: RouteObject = {
-  path: '/admin/social-services',
+export const claimsRoutes: RouteObject = {
+  path: '/admin/reclamos',
   element: (
     <ProtectedRoute>
       <DefaultLayout />
@@ -13,7 +14,11 @@ export const socialServicesRoutes: RouteObject = {
   children: [
     {
       path: '',
-      element: <SocialServicesView />,
+      element: <ClaimsView />,
+    },
+    {
+      path: ':id',
+      element: <ClaimDetail />,
     },
   ],
 }

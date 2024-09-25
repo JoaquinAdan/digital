@@ -1,39 +1,36 @@
+import TableShared from '@/modules/shared/components/table/table'
+import { FilterDto } from '@/modules/shared/models/filter'
 import { useQueryClient } from '@tanstack/react-query'
 import { SortingState, getCoreRowModel, getFilteredRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
 import React, { useEffect } from 'react'
 import type { DateRange } from 'react-day-picker'
+import toClaimViewModel from '../../adapters/claim-view-model'
 import { columns } from '../../components/columns'
-import { FilterDto } from '@/modules/shared/models/filter'
-import TableShared from '@/modules/shared/components/table/table'
-import { Social } from '../../dto/social.dto'
+import { useClaims } from '../../hooks/use-claims'
+import { ClaimViewModel } from '../../models/claims-view-model'
+import CreateClaim from '../create-claim'
 
-export default function TableAdminForms() {
-  const [filters, setFilters] = React.useState<FilterDto>({ page: 1, limit: 10 } as FilterDto)
+export default function TableClaims() {
+  const [filters, setFilters] = React.useState<FilterDto>({ page: 1, limit: 10 })
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const [pagination, setPagination] = React.useState({
-    pageIndex: 0,
-    pageSize: 10,
-  })
+  const [pagination, setPagination] = React.useState({ pageIndex: 0, pageSize: 10 })
+
+  const { data } = useClaims(filters)
+
   const [date, setDate] = React.useState<DateRange | undefined>()
   const [filterValue, setFilterValue] = React.useState<{ type: string; value: string; label: string }>({
     type: '',
     value: '',
     label: '',
   })
-
+  console.log(toClaimViewModel(data?.data))
   const queryClient = useQueryClient()
-  const data = {
-    data: [],
-    count: 5,
-    totalPages: 1,
-  }
-
   const table = useReactTable({
-    data: (data as { data: Social[] })?.data || [],
+    data: toClaimViewModel(data?.data),
     columns,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
-    rowCount: (data as { count: number })?.count,
+    rowCount: data?.pagination.count,
     onPaginationChange: setPagination,
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -69,16 +66,10 @@ export default function TableAdminForms() {
   }, [date])
 
   useEffect(() => {
+    if (sorting.length === 0) return
     setFilters((prev) => ({
       ...prev,
-      sortField:
-        sorting[0]?.id === 'area'
-          ? 'areaId'
-          : sorting[0]?.id === 'event'
-          ? 'eventId'
-          : sorting[0]?.id === 'wasResolved'
-          ? 'resolved'
-          : sorting[0]?.id,
+      sortField: sorting[0]?.id,
       sortDirection: sorting[0]?.desc && sorting ? 'DESC' : 'ASC',
     }))
   }, [sorting])
@@ -88,16 +79,18 @@ export default function TableAdminForms() {
   }, [filters, queryClient])
 
   return (
-    <TableShared<Social>
-      filterBy='nombre'
-      columns={columns}
-      filterType='users'
-      totalPages={data ? data.totalPages : 1}
+    <TableShared<ClaimViewModel>
+      totalPages={data ? data?.pagination.totalPages : 1}
       setFilterValue={setFilterValue}
+      createButton={<CreateClaim />}
       filterValue={filterValue}
+      filterType='claims'
+      haveActions={true}
+      columns={columns}
+      setDate={setDate}
+      filterBy='title'
       table={table}
       date={date}
-      setDate={setDate}
     />
   )
 }

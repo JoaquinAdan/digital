@@ -3,8 +3,8 @@ import DefaultLayout from '@/modules/shared/components/layout/default-layout'
 import { RouteObject } from 'react-router'
 import { SocialServicesView } from './imports'
 
-export const socialServicesRoutes: RouteObject = {
-  path: '/admin/social-services',
+export const socialServicesVisitorRoutes: RouteObject = {
+  path: '/social-services',
   element: (
     <ProtectedRoute>
       <DefaultLayout />
