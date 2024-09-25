@@ -11,7 +11,6 @@ import {
 } from '@/modules/shared/components/ui/dialog'
 import { Form } from '@/modules/shared/components/ui/form'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
-import { toast } from '@/modules/shared/components/ui/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Pencil } from 'lucide-react'
 import React, { useEffect } from 'react'
@@ -20,6 +19,7 @@ import { z } from 'zod'
 import ClaimForm from '../../components/form'
 import { claimDefaultValue } from '../../models/claim-default-value'
 import { ClaimFormDto } from '../../dto/claim-form'
+import toast from 'react-hot-toast'
 
 const formSchema = z.object({
   ciudadanoId: z.string().min(1, 'Debes escribir un titulo para el reclamo'),
@@ -49,11 +49,7 @@ const UpdateClaim = ({ id }: { id?: string }) => {
   // }
 
   const onSuccess = () => {
-    toast({
-      title: 'Reclamo actualizado',
-      description: 'El reclamo ha sido actualizado con exito',
-      variant: 'success',
-    })
+    toast.success('El reclamo ha sido actualizado con exito')
   }
 
   const form = useForm<ClaimFormDto>({
