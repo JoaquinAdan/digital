@@ -42,7 +42,6 @@ const Login = () => {
     //   setError('Credenciales incorrectas')
     //   return
     // }
-    console.log('redirect!')
     navigate('/incidents')
   }
   return (
