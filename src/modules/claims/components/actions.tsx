@@ -13,7 +13,11 @@ export default function Actions({ id }: { id?: string }) {
     <div className='flex gap-2'>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button size='icon' variant='outline' onClick={() => navigate(`${PATHS.ADMIN.CLAIMS_DETAIL}/${id}`)}>
+          <Button
+            size='icon'
+            variant='outline'
+            onClick={() => navigate(`${PATHS.ADMIN.CLAIMS + PATHS.GENERICS.DETAIL}/${id}`)}
+          >
             <BookOpenText className='h-4 w-4' />
           </Button>
         </TooltipTrigger>

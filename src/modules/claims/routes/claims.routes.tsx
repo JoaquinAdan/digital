@@ -18,7 +18,7 @@ export const claimsRoutes: RouteObject = {
       element: <ClaimsView />,
     },
     {
-      path: `${PATHS.ADMIN.CLAIMS_DETAIL}/:id`,
+      path: `${PATHS.ADMIN.CLAIMS + PATHS.GENERICS.DETAIL}/:id`,
       element: <ClaimDetail />,
     },
   ],

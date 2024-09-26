@@ -1,4 +1,5 @@
 <<<<<<< README.md
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -49,3 +50,29 @@ export default tseslint.config({
   },
 })
 ```
+
+## Roles en la aplicación:
+
+# PUBLICS - publics
+
+Rol por default para vistas que no necesitan iniciar sesión
+
+# NEIGHBOR - neighbor
+
+Rol para vecinos que necesitan iniciar sesión para ver contenido de vistas
+
+# ADMIN - admin
+
+Rol para administradores que necesitan iniciar sesión para ver contenido de vistas administrativas del municipio
+
+# DIGITAL - digital
+
+Rol para desarrolladores o personal seleccionado para mantener el totalidad de la aplicación y acceder a vistas de administración de la aplicación
+
+## Rutas protegidas
+
+La rutas protegidas de la aplicación funcionan de 3 maneras diferentes:
+
+- Los archivos .routes.tsx de rutas [publics] se envuelven con el componente <PublicRoute> ubicado en '@/modules/shared/components/routes/public-route'
+- Los archivos .routes.tsx de rutas [neighbor] se envuelven con ?
+- Los archivos .routes.tsx de rutas [admin] y [digital] se envuelven con <ProtectedRoute> ubicado en '@/modules/shared/components/routes/protected-route' este se encargara de validar los permisos de cada usuario para permitir el acceso a la ruta y tambien de si tiene una sesión activa
