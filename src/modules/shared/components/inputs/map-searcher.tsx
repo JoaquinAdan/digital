@@ -15,6 +15,7 @@ import { z } from 'zod'
 
 type Props<T extends FieldValues> = {
   form: UseFormReturn<T>
+  title: string
 }
 
 const formSchema = z.object({
@@ -22,9 +23,9 @@ const formSchema = z.object({
   city: z.string().min(1, 'Debes escribir una ciudad'),
 })
 
-const MapSearcher = <T extends FieldValues>({ form }: Props<T>) => {
+const MapSearcher = <T extends FieldValues>({ form, title }: Props<T>) => {
   const [isCoordsChanged, setIsCoordsChanged] = useState(false)
-  
+
   const nominatimForm = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: { street: '', city: 'Campana' },
@@ -81,7 +82,7 @@ const MapSearcher = <T extends FieldValues>({ form }: Props<T>) => {
 
   return (
     <div>
-      <FormLabel>Ubicación del reclamo:</FormLabel>
+      <FormLabel>Ubicación del {title}:</FormLabel>
       <div className='grid grid-cols-2 md:flex md:items-end gap-2 mb-2'>
         <DigitalInput name='street' placeholder='Nombre de la calle' label='Calle' form={nominatimForm} />
         <DigitalInput name='city' placeholder='Nombre de la ciudad' label='Ciudad' form={nominatimForm} />
@@ -95,7 +96,7 @@ const MapSearcher = <T extends FieldValues>({ form }: Props<T>) => {
           Buscar
         </LoadingButton>
       </div>
-      <p className='text-gray-400 text-xs mb-2'>Utiliza estos inputs para geolocalizar la ubicación del reclamo</p>
+      <p className='text-gray-400 text-xs mb-2'>Utiliza estos inputs para geolocalizar la ubicación del {title}</p>
 
       <InputLayout name={'coordinates' as Path<T>} form={form} styles='col-span-2'>
         <>

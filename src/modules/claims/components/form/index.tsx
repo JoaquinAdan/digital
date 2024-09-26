@@ -58,7 +58,7 @@ const ClaimForm = ({ form }: { form: UseFormReturn<ClaimFormDto> }) => {
         styles='col-span-2'
       />
       <div className='col-span-2'>
-        <MapSearcher form={form} />
+        <MapSearcher form={form} title='reclamo' />
       </div>
     </div>
   )

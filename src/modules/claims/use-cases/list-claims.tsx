@@ -4,11 +4,11 @@ import { useQueryClient } from '@tanstack/react-query'
 import { SortingState, getCoreRowModel, getFilteredRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
 import React, { useEffect } from 'react'
 import type { DateRange } from 'react-day-picker'
-import toClaimViewModel from '../../adapters/claim-view-model'
-import { columns } from '../../components/columns'
-import { useClaims } from '../../hooks/use-claims'
-import { ClaimViewModel } from '../../models/claims-view-model'
-import CreateClaim from '../create-claim'
+import toClaimViewModel from '../adapters/claim-view-model'
+import { columns } from '../components/columns'
+import { useClaims } from '../hooks/use-claims'
+import { ClaimViewModel } from '../models/claims-view-model'
+import CreateClaim from './create-claim'
 
 export default function TableClaims() {
   const [filters, setFilters] = React.useState<FilterDto>({ page: 1, limit: 10 })

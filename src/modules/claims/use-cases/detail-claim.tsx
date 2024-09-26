@@ -1,7 +1,7 @@
 import { defaultLocation } from '@/configs/constants/default-location'
 import Datum from '@/modules/shared/components/Datum'
 import MapOnlyView from '@/modules/shared/components/maps/only-view'
-import { Claim } from '../../models/claim'
+import { Claim } from '../models/claim'
 
 const DetailClaim = ({ data, isLoading }: { data: Claim | undefined; isLoading: boolean }) => {
   return (
