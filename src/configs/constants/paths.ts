@@ -9,7 +9,7 @@ const PATHS = {
     HOME: '/',
   },
   NEIGHBOR: {},
-  ADMIN: { CLAIMS: '/reclamos/admin', CLAIMS_DETAIL: '/reclamos/admin/detail' },
+  ADMIN: { CLAIMS: '/reclamos', CLAIMS_DETAIL: '/reclamos/detail' },
   DIGITAL: { USERS: '/usuarios' },
 }
 

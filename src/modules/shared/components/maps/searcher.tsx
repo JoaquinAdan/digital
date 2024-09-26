@@ -1,6 +1,6 @@
 import DigitalInput from '@/modules/shared/components/inputs/digital-input'
 import InputLayout from '@/modules/shared/components/inputs/input-layout'
-import MapSelector from '@/modules/shared/components/inputs/map-selector'
+import MapSelector from './selector'
 import { FormLabel } from '@/modules/shared/components/ui/form'
 import LoadingButton from '@/modules/shared/components/ui/loading-button'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
