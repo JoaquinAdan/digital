@@ -1,3 +1,7 @@
+/*
+ * Los PATHS estan divididos en los 4 posibles roles generales de la aplicación, revisar en README.md
+ */
+
 const PATHS = {
   PUBLICS: {
     ELECTRONIC_ADDRESS: '/domicilio-electronico',
