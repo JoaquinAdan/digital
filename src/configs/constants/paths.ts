@@ -17,7 +17,7 @@ const PATHS = {
     HOME: '/',
   },
   NEIGHBOR: {},
-  ADMIN: { CLAIMS: '/reclamos/admin', CLAIMS_DETAIL: '/reclamos/admin/detail' },
+  ADMIN: { CLAIMS: '/reclamos', CLAIMS_DETAIL: '/reclamos/detail' },
   DIGITAL: { USERS: '/usuarios' },
 >>>>>>> e406cae96af548c24d8354cdce68d460a4952336
 }

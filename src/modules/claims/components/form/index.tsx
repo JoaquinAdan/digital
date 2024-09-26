@@ -6,7 +6,7 @@ import { ClaimFormDto } from '../../dto/claim-form'
 import { useClaimsCatalog } from '../../hooks/use-claims-catalog'
 import { useOriginCatalog } from '../../hooks/use-origin-catalog'
 import { useServiceAreaCatalog } from '../../hooks/use-service-area-catalog'
-import MapSearcher from '../../../shared/components/inputs/map-searcher'
+import MapSearcher from '../../../shared/components/maps/searcher'
 
 const ClaimForm = ({ form }: { form: UseFormReturn<ClaimFormDto> }) => {
   const claimsCatalog = useClaimsCatalog()
