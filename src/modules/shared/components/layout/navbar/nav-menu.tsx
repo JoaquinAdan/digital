@@ -15,7 +15,7 @@ const NavMenu = () => {
       : protectedItems.filter((item) => scopes?.some((scope) => item.href.includes(scope)))
     navItems = [...navItems, ...filteredArray]
   }
-
+  console.log(navItems)
   return (
     <ul className='grid xl:w-[1000px] gap-3 p-0 xl:p-4 xl:grid-cols-3'>
       {navItems.map((component) => (

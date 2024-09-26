@@ -4,8 +4,8 @@ import { RouteObject } from "react-router";
 import { SocialServicesView } from "./imports";
 import PATHS from "@/configs/constants/paths";
 
-export const socialServicesRoutes: RouteObject = {
-  path: PATHS.ADMIN.SOCIAL,
+export const socialServicesVisitorRoutes: RouteObject = {
+  path: PATHS.ADMIN.SOCIAL + PATHS.GENERICS.SURVEY,
   element: (
     <ProtectedRoute>
       <DefaultLayout />
@@ -15,6 +15,10 @@ export const socialServicesRoutes: RouteObject = {
     {
       path: "",
       element: <SocialServicesView />,
+    },
+    {
+      path: ":id",
+      element: <div>cada encuesta</div>,
     },
   ],
 };

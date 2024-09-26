@@ -5,10 +5,11 @@ import { Users } from 'lucide-react'
 
 const navSocialServices: NavItem = {
   title: 'Desarrollo Social',
-  href: PATHS.SOCIAL_ADMIN,
+  href: PATHS.ADMIN.SOCIAL,
   description: 'Formularios y encuestas.',
   icon: Users,
   visibility: VISIBILITY.PRIVATE,
 }
 
 export default navSocialServices
+

@@ -5,22 +5,28 @@
 
 const PATHS = {
   PUBLICS: {
-    ELECTRONIC_ADDRESS: '/domicilio-electronico',
-    CONTACTS: '/contacts',
-    AUTH: '/auth',
-    LOGIN: '/login',
-    LOGOUT: '/logout',
-    EXAMPLE: '/ejemplo',
-    HOME: '/',
+    ELECTRONIC_ADDRESS: "/domicilio-electronico",
+    CONTACTS: "/contacts",
+    AUTH: "/auth",
+    LOGIN: "/login",
+    LOGOUT: "/logout",
+    EXAMPLE: "/ejemplo",
+    HOME: "/",
   },
   NEIGHBOR: {},
-  ADMIN: { CLAIMS: '/reclamos' },
-  DIGITAL: { USERS: '/usuarios' },
-  GENERICS: {
-    COMPLETED: '/completado',
-    AUTHENTICATION: '/autenticacion',
-    DETAIL: '/detalle',
+  ADMIN: {
+    CLAIMS: "/reclamos",
+    SOCIAL: "/social",
   },
-}
+  DIGITAL: {
+    USERS: "/usuarios",
+  },
+  GENERICS: {
+    COMPLETED: "/completado",
+    AUTHENTICATION: "/autenticacion",
+    DETAIL: "/detalle",
+    SURVEY: "/encuesta",
+  },
+};
 
-export default PATHS
+export default PATHS;
