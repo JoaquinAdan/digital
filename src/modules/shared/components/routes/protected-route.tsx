@@ -1,11 +1,14 @@
 import PATHS from '@/configs/constants/paths'
 import useAuth from '@/modules/auth/hooks/use-auth'
-import { Navigate } from 'react-router'
+import { Navigate, useLocation } from 'react-router'
 
 export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user } = useAuth()
+  const { pathname } = useLocation()
+  console.log(user)
+  console.log(pathname.split('/'))
   if (!user) {
-    return <Navigate to={PATHS.HOME} />
+    return <Navigate to={PATHS.PUBLICS.HOME} />
   }
 
   return children

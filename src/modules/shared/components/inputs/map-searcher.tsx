@@ -15,6 +15,7 @@ import { z } from 'zod'
 
 type Props<T extends FieldValues> = {
   form: UseFormReturn<T>
+  title: string
 }
 
 const formSchema = z.object({
@@ -22,8 +23,9 @@ const formSchema = z.object({
   city: z.string().min(1, 'Debes escribir una ciudad'),
 })
 
-const MapSearcher = <T extends FieldValues>({ form }: Props<T>) => {
+const MapSearcher = <T extends FieldValues>({ form, title }: Props<T>) => {
   const [isCoordsChanged, setIsCoordsChanged] = useState(false)
+
   const nominatimForm = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: { street: '', city: 'Campana' },
@@ -32,6 +34,21 @@ const MapSearcher = <T extends FieldValues>({ form }: Props<T>) => {
     latitude: form.watch('coordinates.latitude' as Path<T>),
     longitude: form.watch('coordinates.longitude' as Path<T>),
   })
+
+  const mutation = useCoords((data) => {
+    if (data.length > 0) {
+      form.setValue(
+        'coordinates' as Path<T>,
+        {
+          latitude: Number(data[0]?.lat),
+          longitude: Number(data[0]?.lon),
+        } as PathValue<T, Path<T>>
+      )
+    } else toast.error('No se encontró la ubicación')
+    setIsCoordsChanged(false)
+  })
+
+  const onSubmit = (values: NominatimForm) => mutation.mutate({ street: values.street, city: values.city })
 
   useEffect(() => {
     const currentCoords = {
@@ -63,28 +80,9 @@ const MapSearcher = <T extends FieldValues>({ form }: Props<T>) => {
     }
   }, [data.isRefetching])
 
-  const mutation = useCoords((data) => {
-    if (data.length > 0) {
-      form.setValue(
-        'coordinates' as Path<T>,
-        {
-          latitude: Number(data[0]?.lat),
-          longitude: Number(data[0]?.lon),
-        } as PathValue<T, Path<T>>
-      )
-    } else toast.error('No se encontró la ubicación')
-    setIsCoordsChanged(false)
-  })
-  const neighborhood =
-    data?.data?.features?.[0]?.properties?.address?.neighbourhood ||
-    mutation?.data?.[0]?.display_name.split(',')[1] ||
-    'No encontrado'
-
-  const onSubmit = (values: NominatimForm) => mutation.mutate({ street: values.street, city: values.city })
-
   return (
     <div>
-      <FormLabel>Ubicación del reclamo:</FormLabel>
+      <FormLabel>Ubicación del {title}:</FormLabel>
       <div className='grid grid-cols-2 md:flex md:items-end gap-2 mb-2'>
         <DigitalInput name='street' placeholder='Nombre de la calle' label='Calle' form={nominatimForm} />
         <DigitalInput name='city' placeholder='Nombre de la ciudad' label='Ciudad' form={nominatimForm} />
@@ -98,7 +96,7 @@ const MapSearcher = <T extends FieldValues>({ form }: Props<T>) => {
           Buscar
         </LoadingButton>
       </div>
-      <p className='text-gray-400 text-xs mb-2'>Utiliza estos inputs para geolocalizar la ubicación del reclamo</p>
+      <p className='text-gray-400 text-xs mb-2'>Utiliza estos inputs para geolocalizar la ubicación del {title}</p>
 
       <InputLayout name={'coordinates' as Path<T>} form={form} styles='col-span-2'>
         <>
@@ -123,7 +121,12 @@ const MapSearcher = <T extends FieldValues>({ form }: Props<T>) => {
               </span>
             </p>
             <p className='font-medium'>
-              Barrio: <span className='font-normal'>{neighborhood} </span>
+              Barrio:{' '}
+              <span className='font-normal'>
+                {data?.data?.features?.[0]?.properties?.address?.neighbourhood ||
+                  mutation?.data?.[0]?.display_name.split(',')[1] ||
+                  'No encontrado'}
+              </span>
             </p>
           </div>
         </>

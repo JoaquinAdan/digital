@@ -3,9 +3,10 @@ import DefaultLayout from '@/modules/shared/components/layout/default-layout'
 import { RouteObject } from 'react-router'
 import { ClaimsView } from './imports'
 import ClaimDetail from '../views/claim-detail'
+import PATHS from '@/configs/constants/paths'
 
 export const claimsRoutes: RouteObject = {
-  path: '/admin/reclamos',
+  path: PATHS.ADMIN.CLAIMS,
   element: (
     <ProtectedRoute>
       <DefaultLayout />
@@ -17,7 +18,7 @@ export const claimsRoutes: RouteObject = {
       element: <ClaimsView />,
     },
     {
-      path: ':id',
+      path: `${PATHS.ADMIN.CLAIMS_DETAIL}/:id`,
       element: <ClaimDetail />,
     },
   ],

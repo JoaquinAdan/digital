@@ -5,7 +5,7 @@ import { Angry } from 'lucide-react'
 
 const navClaims: NavItem = {
   title: 'Reclamos',
-  href: PATHS.ADMIN_CLAIMS,
+  href: PATHS.ADMIN.CLAIMS,
   description: 'Administra los reclamos de los vecinos de la ciudad.',
   icon: Angry,
   visibility: VISIBILITY.PRIVATE,
