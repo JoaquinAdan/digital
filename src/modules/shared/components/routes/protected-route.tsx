@@ -24,6 +24,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
   const [_, scope, resource] = pathname.split('/')
 
   const toastDisplayed = useRef(false)
+
   const canAccess = user?.roles.some((role) =>
     role.permissions.some((permission) => {
       const scopePermission = permission.scope === '*' || permission.scope === scope
@@ -31,8 +32,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
       return resource ? resourcePermission && scopePermission : scopePermission
     })
   )
-  console.log(user?.roles)
-  console.log(scope, resource)
+
   useEffect(() => {
     if (!canAccess && !toastDisplayed.current) {
       toast.error('No tienes permisos para acceder a esta página')
