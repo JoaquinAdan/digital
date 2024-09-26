@@ -88,7 +88,7 @@ export default function TableClaims() {
       haveActions={true}
       columns={columns}
       setDate={setDate}
-      filterBy='title'
+      filterBy='vecino'
       table={table}
       date={date}
     />

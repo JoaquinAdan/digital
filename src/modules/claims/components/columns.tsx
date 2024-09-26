@@ -44,8 +44,8 @@ export const columns: ColumnDef<ClaimViewModel>[] = [
   },
   {
     accessorKey: 'area de servicio',
-    header: ({ column }) => <Sort column={column} name='areaServicio' />,
-    cell: ({ row }) => <>{row.getValue('areaServicio')}</>,
+    header: ({ column }) => <Sort column={column} name='Area de servicio' />,
+    cell: ({ row }) => <>{row.getValue('area de servicio')}</>,
   },
   {
     accessorKey: 'origen',
