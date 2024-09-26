@@ -1,5 +1,6 @@
 /*
  * Los PATHS estan divididos en los 4 posibles roles generales de la aplicación, revisar en README.md
+ * Tambien estan los GENERICS que son rutas que se repiten en varios roles
  */
 
 const PATHS = {
@@ -13,8 +14,13 @@ const PATHS = {
     HOME: '/',
   },
   NEIGHBOR: {},
-  ADMIN: { CLAIMS: '/reclamos', CLAIMS_DETAIL: '/reclamos/detail' },
+  ADMIN: { CLAIMS: '/reclamos' },
   DIGITAL: { USERS: '/usuarios' },
+  GENERICS: {
+    COMPLETED: '/completado',
+    AUTHENTICATION: '/autenticacion',
+    DETAIL: '/detalle',
+  },
 }
 
 export default PATHS
