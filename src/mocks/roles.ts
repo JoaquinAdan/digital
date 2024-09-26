@@ -4,18 +4,16 @@ export const rolesMock = [
   //   permissions: [{ scope: '*', resource: '*', action: '*' }],
   // },
   {
-    name: "InspectorReclamos",
-    permissions: [
-      { scope: "reclamos", resource: "detail", action: "authorize" },
-    ],
+    name: 'InspectorReclamos',
+    permissions: [{ scope: 'reclamos', resource: 'detail', action: 'authorize' }],
   },
   {
-    name: "ServicioSocialEncuestas",
-    permissions: [{ scope: "social", resouce: "encuesta", action: "*" }],
+    name: 'ServicioSocialEncuestas',
+    permissions: [{ scope: 'social', resource: 'encuesta', action: '*' }],
   },
   {
-    name: "ServicioSocial",
-    permissions: [{ scope: "social", resouce: null, action: "*" }],
+    name: 'ServicioSocial',
+    permissions: [{ scope: 'social', resouce: null, action: '*' }],
   },
   // {
   //   name: 'JefeReclamos',
@@ -33,4 +31,4 @@ export const rolesMock = [
   //   name: 'JefeAreaReclamos',
   //   permissions: [{ scope: 'reclamos', resource: '*', action: 'onlyRead' }],
   // },
-];
+]
