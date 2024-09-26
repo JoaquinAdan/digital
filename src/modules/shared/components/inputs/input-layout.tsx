@@ -3,7 +3,7 @@ import { FieldValues, Path, UseFormReturn } from 'react-hook-form'
 
 type Props<T extends FieldValues> = {
   name: Path<T>
-  label: string
+  label?: string
   form: UseFormReturn<T>
   children: React.ReactNode
   styles?: string
@@ -15,7 +15,7 @@ const InputLayout = <T extends FieldValues>({ name, label, styles, form, childre
       name={name}
       render={() => (
         <FormItem className={styles}>
-          <FormLabel>{label}</FormLabel>
+          {label && <FormLabel>{label}</FormLabel>}
           <FormControl>{children}</FormControl>
           <FormMessage />
         </FormItem>

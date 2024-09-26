@@ -1,13 +1,12 @@
 import DigitalAutocomplete from '@/modules/shared/components/inputs/digital-autocomplete'
 import DigitalInput from '@/modules/shared/components/inputs/digital-input'
 import DigitalTextarea from '@/modules/shared/components/inputs/digital-textarea'
-import InputLayout from '@/modules/shared/components/inputs/input-layout'
 import { UseFormReturn } from 'react-hook-form'
 import { ClaimFormDto } from '../../dto/claim-form'
 import { useClaimsCatalog } from '../../hooks/use-claims-catalog'
 import { useOriginCatalog } from '../../hooks/use-origin-catalog'
 import { useServiceAreaCatalog } from '../../hooks/use-service-area-catalog'
-import MapSelector from './map-selector'
+import MapSearcher from '../../../shared/components/inputs/map-searcher'
 
 const ClaimForm = ({ form }: { form: UseFormReturn<ClaimFormDto> }) => {
   const claimsCatalog = useClaimsCatalog()
@@ -58,20 +57,9 @@ const ClaimForm = ({ form }: { form: UseFormReturn<ClaimFormDto> }) => {
         form={form}
         styles='col-span-2'
       />
-      <InputLayout name='coordinates' label='Ubicación del reclamo' form={form} styles='col-span-2'>
-        <>
-          <div className='w-full border-l-[1px] border-t-[1px] border-r-[1px] rounded-t-md p-1 md:p-2 text-center mb-[-8px]'>
-            <p>
-              latitud: <span className='font-medium'>{form.watch('coordinates.latitude')?.toFixed(5)}</span>, longitud:
-              <span className='font-medium'> {form.watch('coordinates.longitude')?.toFixed(5)}</span>
-            </p>
-          </div>
-          <MapSelector
-            value={[form.watch('coordinates.latitude'), form.watch('coordinates.longitude')]}
-            setValue={form.setValue}
-          />
-        </>
-      </InputLayout>
+      <div className='col-span-2'>
+        <MapSearcher form={form} title='reclamo' />
+      </div>
     </div>
   )
 }

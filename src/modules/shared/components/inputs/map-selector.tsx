@@ -2,7 +2,7 @@ import { MapContainer, Marker, TileLayer, useMap, useMapEvents } from 'react-lea
 import { LatLngTuple, Marker as MarkerLeaflet } from 'leaflet'
 import { useMemo, useRef, useState } from 'react'
 import { FieldValues, Path, PathValue, UseFormSetValue } from 'react-hook-form'
-import { blueIcon } from './marks'
+import { blueIcon } from '../../../claims/components/form/marks'
 import 'leaflet/dist/leaflet.css'
 
 type Props<T extends FieldValues> = {
@@ -14,13 +14,9 @@ const LocationOnClick = <T extends FieldValues>({ setPosition, setValue }: Props
   useMapEvents({
     click(e) {
       setPosition(e.latlng)
-      setValue(
-        'coordinates' as Path<T>,
-        {
-          latitude: e.latlng.lat,
-          longitude: e.latlng.lng,
-        } as PathValue<T, Path<T>>
-      )
+      console.log(e.latlng)
+      setValue('coordinates.latitude' as Path<T>, e.latlng.lat as PathValue<T, Path<T>>)
+      setValue('coordinates.longitude' as Path<T>, e.latlng.lng as PathValue<T, Path<T>>)
     },
   })
   return null
@@ -48,45 +44,38 @@ const MapSelector = <T extends FieldValues>({ value, setValue }: MapSelectorProp
       dragend() {
         const marker = markerRef.current
         if (marker != null) {
-          setValue(
-            'coordinates' as Path<T>,
-            {
-              latitude: marker.getLatLng().lat,
-              longitude: marker.getLatLng().lng,
-            } as PathValue<T, Path<T>>
-          )
+          setValue('coordinates.latitude' as Path<T>, marker.getLatLng().lat as PathValue<T, Path<T>>)
+          setValue('coordinates.longitude' as Path<T>, marker.getLatLng().lng as PathValue<T, Path<T>>)
           setPosition(marker.getLatLng())
         }
       },
     }),
-    [setValue]
+    [setValue, setPosition, markerRef]
   )
 
   return (
-    <div>
-      <div style={{ height: '400px', width: '100%' }} className='my-2'>
-        <MapContainer
-          center={position}
-          zoom={15}
-          scrollWheelZoom={true}
-          attributionControl={false}
-          style={{ height: '100%', width: '100%' }}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-          />
-          <ChangeView center={[position.lat, position.lng]} />
-          <Marker
-            icon={blueIcon}
-            eventHandlers={eventHandlers}
-            draggable={Boolean(setValue)}
-            position={position}
-            ref={markerRef}
-          />
-          {setValue && <LocationOnClick setPosition={setPosition} setValue={setValue} />}
-        </MapContainer>
-      </div>
+    <div style={{ height: '400px', width: '100%', margin: 0 }}>
+      <MapContainer
+        center={position}
+        zoom={15}
+        scrollWheelZoom={true}
+        attributionControl={false}
+        style={{ height: '100%', width: '100%' }}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        />
+        <ChangeView center={[position.lat, position.lng]} />
+        <Marker
+          icon={blueIcon}
+          eventHandlers={eventHandlers}
+          draggable={Boolean(setValue)}
+          position={position}
+          ref={markerRef}
+        />
+        {setValue && <LocationOnClick setPosition={setPosition} setValue={setValue} />}
+      </MapContainer>
     </div>
   )
 }
