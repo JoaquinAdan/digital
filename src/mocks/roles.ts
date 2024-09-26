@@ -5,7 +5,7 @@ export const rolesMock = [
   // },
   {
     name: 'InspectorReclamos',
-    permissions: [{ scope: 'reclamos', resource: '*', action: 'authorize' }],
+    permissions: [{ scope: 'reclamos', resource: 'detail', action: 'authorize' }],
   },
   // {
   //   name: 'JefeReclamos',
