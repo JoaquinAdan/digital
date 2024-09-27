@@ -2,7 +2,7 @@ import DigitalAutocomplete from '@/modules/shared/components/inputs/digital-auto
 import DigitalInput from '@/modules/shared/components/inputs/digital-input'
 import DigitalTextarea from '@/modules/shared/components/inputs/digital-textarea'
 import { UseFormReturn } from 'react-hook-form'
-import { ClaimFormDto } from '../../dto/claim-form'
+import { ClaimFormDto } from '../../dto/claim-form.dto'
 import { useClaimsCatalog } from '../../hooks/use-claims-catalog'
 import { useOriginCatalog } from '../../hooks/use-origin-catalog'
 import { useServiceAreaCatalog } from '../../hooks/use-service-area-catalog'

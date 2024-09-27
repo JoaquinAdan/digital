@@ -5,7 +5,7 @@ import { Users } from 'lucide-react'
 
 const navSocialServicesVisitors: NavItem = {
   title: 'Desarrollo Social Encuestas',
-  href: PATHS.ADMIN.SOCIAL + PATHS.GENERICS.SURVEY,
+  href: PATHS.ADMIN.SOCIAL + PATHS.GENERIC.SURVEY,
   description: 'Formularios y encuestas.',
   icon: Users,
   visibility: VISIBILITY.NEIGHBOR,

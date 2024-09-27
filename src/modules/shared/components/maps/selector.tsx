@@ -14,7 +14,6 @@ const LocationOnClick = <T extends FieldValues>({ setPosition, setValue }: Props
   useMapEvents({
     click(e) {
       setPosition(e.latlng)
-      console.log(e.latlng)
       setValue('coordinates.latitude' as Path<T>, e.latlng.lat as PathValue<T, Path<T>>)
       setValue('coordinates.longitude' as Path<T>, e.latlng.lng as PathValue<T, Path<T>>)
     },

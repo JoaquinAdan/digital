@@ -3,14 +3,14 @@ import { LoginView } from './imports'
 import PATHS from '@/configs/constants/paths'
 
 export const authRoutes: RouteObject = {
-  path: PATHS.PUBLICS.AUTH,
+  path: PATHS.PUBLIC.AUTH,
   children: [
     {
-      path: PATHS.PUBLICS.AUTH + PATHS.PUBLICS.LOGIN,
+      path: PATHS.PUBLIC.AUTH + PATHS.PUBLIC.LOGIN,
       element: <LoginView />,
     },
     {
-      path: PATHS.PUBLICS.AUTH + PATHS.PUBLICS.LOGOUT,
+      path: PATHS.PUBLIC.AUTH + PATHS.PUBLIC.LOGOUT,
       element: <></>,
     },
   ],

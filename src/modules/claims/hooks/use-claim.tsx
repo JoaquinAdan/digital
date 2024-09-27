@@ -1,6 +1,6 @@
 import useAuth from '@/modules/auth/hooks/use-auth'
 import { useQuery } from '@tanstack/react-query'
-import { ClaimDetail } from '../dto/claim-detail-response'
+import { ClaimDetail } from '../dto/claim-detail-response.dto'
 import { getClaimByIdHttp } from '../services/get-claim-by-id'
 
 export const GET_CLAIM_DETAIL = 'GET_CLAIM_DETAIL'

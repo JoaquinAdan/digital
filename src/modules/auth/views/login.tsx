@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import useAuth from '../hooks/use-auth'
 import LoadingButton from '@/modules/shared/components/ui/loading-button'
+import { LoginCredentialsDto } from '../dto/login-credentials.dto'
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Por favor, ingresa un email válido.' }),
@@ -22,6 +23,11 @@ const Login = () => {
       password: '',
     },
   })
+
+  const onSubmit = (credentials: LoginCredentialsDto) => {
+    login(credentials)
+    form.reset()
+  }
 
   return (
     <div className='container relative h-screen items-center justify-center lg:max-w-none flex lg:px-0'>
@@ -43,7 +49,7 @@ const Login = () => {
         </div>
 
         <Form {...form}>
-          <form className='space-y-8'>
+          <form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
               name='email'
@@ -70,10 +76,12 @@ const Login = () => {
                 </FormItem>
               )}
             />
-            <LoadingButton isLoading={isLoadingLogin} className='w-full' type='submit' size='sm' onClick={login}>
+            <LoadingButton isLoading={isLoadingLogin} className='w-full' type='submit' size='sm'>
               Ingresar
             </LoadingButton>
-            <p className={cn(`text-sm font-medium text-destructive opacity-${errorLoading ? '1' : '0'} h-4`)}>{errorLoading}</p>
+            <p className={cn(`text-sm font-medium text-destructive opacity-${errorLoading ? '1' : '0'} h-4`)}>
+              {errorLoading}
+            </p>
           </form>
         </Form>
       </div>

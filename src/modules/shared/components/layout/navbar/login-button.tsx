@@ -7,7 +7,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
 const LoginButton = ({ width }: { width: string }) => {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
-  console.log(user?.name.split(' '))
   return (
     <>
       {user ? (
@@ -30,7 +29,7 @@ const LoginButton = ({ width }: { width: string }) => {
         </div>
       ) : (
         // <LoadingButton isLoading={isLoadingLogin} className={width} size='sm' onClick={login}>
-        <Button className={width} size='sm' onClick={() => navigate(PATHS.PUBLICS.AUTH + PATHS.PUBLICS.LOGIN)}>
+        <Button className={width} size='sm' onClick={() => navigate(PATHS.PUBLIC.AUTH + PATHS.PUBLIC.LOGIN)}>
           Iniciar sesión
         </Button>
       )}

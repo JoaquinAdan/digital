@@ -5,7 +5,7 @@ import { Ruler } from 'lucide-react'
 
 const navHome: NavItem = {
   title: 'Inicio',
-  href: PATHS.PUBLICS.HOME,
+  href: PATHS.PUBLIC.HOME,
   description: 'Pagina de inicio de Campana Digital.',
   icon: Ruler,
   visibility: VISIBILITY.PUBLIC,

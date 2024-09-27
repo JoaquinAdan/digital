@@ -5,7 +5,7 @@ import { SocialServicesView } from "./imports";
 import PATHS from "@/configs/constants/paths";
 
 export const socialServicesVisitorRoutes: RouteObject = {
-  path: PATHS.ADMIN.SOCIAL + PATHS.GENERICS.SURVEY,
+  path: PATHS.ADMIN.SOCIAL + PATHS.GENERIC.SURVEY,
   element: (
     <ProtectedRoute>
       <DefaultLayout />

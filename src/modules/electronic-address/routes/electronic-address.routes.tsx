@@ -5,7 +5,7 @@ import PublicRoute from '@/modules/shared/components/routes/public-route'
 import PATHS from '@/configs/constants/paths'
 
 export const electronicAddressRoutes: RouteObject = {
-  path: PATHS.PUBLICS.ELECTRONIC_ADDRESS,
+  path: PATHS.PUBLIC.ELECTRONIC_ADDRESS,
   element: (
     <PublicRoute>
       <DefaultLayout />

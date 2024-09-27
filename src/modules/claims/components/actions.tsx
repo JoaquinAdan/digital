@@ -16,7 +16,7 @@ export default function Actions({ id }: { id?: string }) {
           <Button
             size='icon'
             variant='outline'
-            onClick={() => navigate(`${PATHS.ADMIN.CLAIMS + PATHS.GENERICS.DETAIL}/${id}`)}
+            onClick={() => navigate(`${PATHS.ADMIN.CLAIMS + PATHS.GENERIC.DETAIL}/${id}`)}
           >
             <BookOpenText className='h-4 w-4' />
           </Button>

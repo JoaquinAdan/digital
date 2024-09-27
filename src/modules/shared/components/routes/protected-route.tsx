@@ -24,7 +24,6 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
   const [_, scope, resource] = pathname.split('/')
 
   const toastDisplayed = useRef(false)
-
   const canAccess = user?.roles.some((role) =>
     role.permissions.some((permission) => {
       const scopePermission = permission.scope === '*' || permission.scope === scope
@@ -40,7 +39,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
     }
   }, [canAccess])
 
-  if (!user || (!resource && !canAccess)) return <Navigate to={PATHS.PUBLICS.HOME} />
+  if (!user || (!resource && !canAccess)) return <Navigate to={PATHS.PUBLIC.HOME} />
 
   if (!canAccess) return <Navigate to={`/${scope}`} />
 

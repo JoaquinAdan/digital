@@ -4,29 +4,29 @@
  */
 
 const PATHS = {
-  PUBLICS: {
-    ELECTRONIC_ADDRESS: "/domicilio-electronico",
-    CONTACTS: "/contacts",
-    AUTH: "/auth",
-    LOGIN: "/login",
-    LOGOUT: "/logout",
-    EXAMPLE: "/ejemplo",
-    HOME: "/",
+  PUBLIC: {
+    ELECTRONIC_ADDRESS: '/domicilio-electronico',
+    CONTACTS: '/contacts',
+    AUTH: '/auth',
+    LOGIN: '/login',
+    LOGOUT: '/logout',
+    EXAMPLE: '/ejemplo',
+    HOME: '/',
   },
   NEIGHBOR: {},
   ADMIN: {
-    CLAIMS: "/reclamos",
-    SOCIAL: "/social",
+    CLAIMS: '/reclamos',
+    SOCIAL: '/social',
   },
   DIGITAL: {
-    USERS: "/usuarios",
+    USERS: '/usuarios',
   },
-  GENERICS: {
-    COMPLETED: "/completado",
-    AUTHENTICATION: "/autenticacion",
-    DETAIL: "/detalle",
-    SURVEY: "/encuesta",
+  GENERIC: {
+    COMPLETED: '/completado',
+    AUTHENTICATION: '/autenticacion',
+    DETAIL: '/detalle',
+    SURVEY: '/encuesta',
   },
-};
+}
 
-export default PATHS;
+export default PATHS

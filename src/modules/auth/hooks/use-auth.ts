@@ -1,37 +1,39 @@
-import { useState } from 'react'
-import { User } from '../models/user'
-import { useAuthStore } from '../stores/auth-store'
-import { userMock } from '@/mocks/user'
-import { useNavigate } from 'react-router'
 import PATHS from '@/configs/constants/paths'
+import { userMock } from '@/mocks/user'
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
+import { LoginCredentialsDto } from '../dto/login-credentials.dto'
+import { useAuthStore } from '../stores/auth-store'
+import { useCreateToken } from './use-create-token'
 
 const useAuth = () => {
-  const [isLoadingLogin, setIsLoadingLogin] = useState(false)
-  const { user, setUser, token } = useAuthStore()
+  const [errorLoading, setErrorLoading] = useState<string | undefined>(undefined)
+  const { user, setUser, token, setToken } = useAuthStore()
   const navigate = useNavigate()
 
-  const login = async (): Promise<User | null> => {
-    localStorage.setItem('user', JSON.stringify(userMock))
-    return new Promise<User | null>(() => {
-      setIsLoadingLogin(true)
-      setTimeout(() => {
-        setUser(userMock)
-        setIsLoadingLogin(false)
-        navigate(PATHS.PUBLICS.HOME)
-      }, 1000)
-    })
+  const onSuccess = (data: { token: string }) => {
+    setUser(userMock)
+    setToken(data.token)
+    navigate(PATHS.PUBLIC.HOME)
   }
 
-  // const errorLoading = 'error al iniciar sesión'
-  const errorLoading = undefined
+  const onError = () => {
+    setErrorLoading('Error al iniciar sesión')
+  }
+
+  const mutation = useCreateToken(onSuccess, onError)
+
+  const login = (credentials: LoginCredentialsDto) => {
+    mutation.mutate(credentials)
+  }
 
   const logout = () => {
-    localStorage.removeItem('user')
     setUser(null)
-    navigate(PATHS.PUBLICS.HOME)
+    setToken(null)
+    navigate(PATHS.PUBLIC.HOME)
   }
 
-  return { errorLoading, login, user, logout, isLoadingLogin, token }
+  return { errorLoading, login, user, logout, isLoadingLogin: mutation.isPending, token }
 }
 
 export default useAuth

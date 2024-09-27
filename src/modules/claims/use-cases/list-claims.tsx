@@ -23,7 +23,7 @@ export default function TableClaims() {
     value: '',
     label: '',
   })
-  console.log(toClaimViewModel(data?.data))
+  // console.log(toClaimViewModel(data?.data))
   const queryClient = useQueryClient()
   const table = useReactTable({
     data: toClaimViewModel(data?.data),

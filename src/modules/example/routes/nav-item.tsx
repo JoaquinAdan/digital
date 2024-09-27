@@ -5,7 +5,7 @@ import { Ruler } from 'lucide-react'
 
 const navExample: NavItem = {
   title: 'Ejemplo',
-  href: PATHS.PUBLICS.EXAMPLE,
+  href: PATHS.PUBLIC.EXAMPLE,
   description: 'Pagina de ejemplo con estructura de carpetas del proyecto.',
   icon: Ruler,
   visibility: VISIBILITY.PUBLIC,

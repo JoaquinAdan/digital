@@ -12,7 +12,7 @@ import { defaultLocation } from '@/configs/constants/default-location'
 import { claimDefaultValue } from '../models/claim-default-value'
 
 // Rest of the code...
-import { ClaimFormDto } from '../dto/claim-form'
+import { ClaimFormDto } from '../dto/claim-form.dto'
 import toast from 'react-hot-toast'
 
 const formSchema = z.object({

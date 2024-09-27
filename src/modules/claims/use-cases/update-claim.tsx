@@ -18,7 +18,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import ClaimForm from '../components/form'
 import { claimDefaultValue } from '../models/claim-default-value'
-import { ClaimFormDto } from '../dto/claim-form'
+import { ClaimFormDto } from '../dto/claim-form.dto'
 import toast from 'react-hot-toast'
 
 const formSchema = z.object({
