@@ -3,11 +3,14 @@ import { HttpError } from './http-error'
 
 export async function handler<K>(r: Promise<Response>): Promise<K> {
   const response = await r
-  if (response.status === 401) window.location.href = PATHS.PUBLIC.LOGIN 
+  if (response.status === 401) {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    window.location.href = PATHS.PUBLIC.HOME
+  }
+  if (response.status === 500) throw new Error('internalServerError')
   try {
     const json = await response.json()
-    console.log(response)
-    if (response.status === 500) throw new Error('internalServerError')
     if (response.ok) return json as K
     throw new HttpError(response.status, json.data)
   } catch (error) {
