@@ -8,7 +8,7 @@ const navClaims: NavItem = {
   href: PATHS.ADMIN.CLAIMS,
   description: 'Administra los reclamos de los vecinos de la ciudad.',
   icon: Angry,
-  visibility: VISIBILITY.PRIVATE,
+  visibility: VISIBILITY.ADMIN,
 }
 
 export default navClaims

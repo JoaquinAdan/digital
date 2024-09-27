@@ -8,7 +8,7 @@ const navSocialServices: NavItem = {
   href: PATHS.ADMIN.SOCIAL,
   description: 'Formularios y encuestas.',
   icon: Users,
-  visibility: VISIBILITY.PRIVATE,
+  visibility: VISIBILITY.ADMIN,
 }
 
 export default navSocialServices

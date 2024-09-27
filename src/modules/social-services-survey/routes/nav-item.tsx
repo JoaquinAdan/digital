@@ -1,14 +1,14 @@
-import PATHS from "@/configs/constants/paths";
-import { VISIBILITY } from "@/configs/constants/visibility";
-import { NavItem } from "@/modules/shared/models/nav-item";
-import { Users } from "lucide-react";
+import PATHS from '@/configs/constants/paths'
+import { VISIBILITY } from '@/configs/constants/visibility'
+import { NavItem } from '@/modules/shared/models/nav-item'
+import { Users } from 'lucide-react'
 
 const navSocialServicesVisitors: NavItem = {
-  title: "Desarrollo Social Encuestas",
+  title: 'Desarrollo Social Encuestas',
   href: PATHS.ADMIN.SOCIAL + PATHS.GENERICS.SURVEY,
-  description: "Formularios y encuestas.",
+  description: 'Formularios y encuestas.',
   icon: Users,
-  visibility: VISIBILITY.VISITOR,
-};
+  visibility: VISIBILITY.NEIGHBOR,
+}
 
-export default navSocialServicesVisitors;
+export default navSocialServicesVisitors

@@ -53,7 +53,7 @@ export default tseslint.config({
 
 ## Roles en la aplicación:
 
-# PUBLICS - publics
+# PUBLIC - public
 
 Rol por default para vistas que no necesitan iniciar sesión
 

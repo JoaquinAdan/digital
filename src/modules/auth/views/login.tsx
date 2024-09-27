@@ -1,30 +1,20 @@
-import { Button } from '@/modules/shared/components/ui/button'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/modules/shared/components/ui/form'
 import logoDigital from '@/assets/shared/logo-white.png'
-import { Input } from '@/modules/shared/components/ui/input'
 import { cn } from '@/lib/utils'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/modules/shared/components/ui/form'
+import { Input } from '@/modules/shared/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2 } from 'lucide-react'
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
+import useAuth from '../hooks/use-auth'
+import LoadingButton from '@/modules/shared/components/ui/loading-button'
 
 const formSchema = z.object({
-  email: z.string().email({
-    message: 'Por favor, ingresa un email válido.',
-  }),
-  password: z.string().min(8, {
-    message: 'La contraseña debe tener al menos 8 caracteres.',
-  }),
+  email: z.string().email({ message: 'Por favor, ingresa un email válido.' }),
+  password: z.string().min(8, { message: 'La contraseña debe tener al menos 8 caracteres.' }),
 })
 
 const Login = () => {
-  const navigate = useNavigate()
-  // const { login } = useAuth()
-  const [loading, setLoading] = useState<boolean>(false)
-  const [error] = useState<string | null>(null)
-
+  const { login, isLoadingLogin, errorLoading } = useAuth()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,17 +23,6 @@ const Login = () => {
     },
   })
 
-  // async function onSubmit(values: z.infer<typeof formSchema>) {
-  async function onSubmit() {
-    setLoading(true)
-    // const isSuccess = await login(values.email, values.password)
-    setLoading(false)
-    // if (!isSuccess) {
-    //   setError('Credenciales incorrectas')
-    //   return
-    // }
-    navigate('/incidents')
-  }
   return (
     <div className='container relative h-screen items-center justify-center lg:max-w-none flex lg:px-0'>
       <div className='relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r flex-1'>
@@ -54,13 +33,6 @@ const Login = () => {
           <p>Campana Digital</p>
         </div>
         <div className='relative z-20 mt-auto'>
-          {/*  <blockquote className='space-y-2'>
-            <p className='text-lg'>
-              &ldquo;This library has saved me countless hours of work and helped me deliver stunning designs to my clients
-              faster than ever before.&rdquo;
-            </p>
-            <footer className='text-sm'>Sofia Davis</footer>
-          </blockquote> */}
           <p className='text-lg'>Version 1</p>
         </div>
       </div>
@@ -71,7 +43,7 @@ const Login = () => {
         </div>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+          <form className='space-y-8'>
             <FormField
               control={form.control}
               name='email'
@@ -98,11 +70,10 @@ const Login = () => {
                 </FormItem>
               )}
             />
-            <p className={cn('text-sm font-medium text-destructive', { hidden: !error })}>{error}</p>
-            <Button type='submit' disabled={loading}>
-              <Loader2 className={`r-2 h-4 w-4 mr-2 animate-spin ${loading ? 'block' : 'hidden'}`} />
+            <LoadingButton isLoading={isLoadingLogin} className='w-full' type='submit' size='sm' onClick={login}>
               Ingresar
-            </Button>
+            </LoadingButton>
+            <p className={cn(`text-sm font-medium text-destructive opacity-${errorLoading ? '1' : '0'} h-4`)}>{errorLoading}</p>
           </form>
         </Form>
       </div>

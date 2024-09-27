@@ -1,5 +1,5 @@
 import logo from '@/assets/shared/logo-muni.png'
-import useBreakpoint from '@/modules/shared/hooks/use-breakpoints'
+import navHome from '@/modules/home/routes/nav-item'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/modules/shared/components/ui/accordion'
 import { Button } from '@/modules/shared/components/ui/button'
 import {
@@ -11,13 +11,11 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/modules/shared/components/ui/navigation-menu'
+import useBreakpoint from '@/modules/shared/hooks/use-breakpoints'
 import { ChevronDown, Menu } from 'lucide-react'
-import NavMenu from './nav-menu'
-import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
 import { Link } from 'react-router-dom'
-import navHome from '@/modules/home/routes/nav-item'
-import useAuth from '@/modules/auth/hooks/use-auth'
-import LoadingButton from '../../ui/loading-button'
+import LoginButton from './login-button'
+import NavMenu from './nav-menu'
 
 export default function NavMegaMenu() {
   const breakpoint = useBreakpoint('xl')
@@ -83,33 +81,5 @@ export default function NavMegaMenu() {
         </Accordion>
       )}
     </div>
-  )
-}
-
-const LoginButton = ({ width }: { width: string }) => {
-  const { user, login, logout, isLoadingLogin } = useAuth()
-  return (
-    <>
-      {user ? (
-        <div className={`flex justify-center space-x-2 max-${width}`}>
-          <Avatar>
-            <AvatarImage src='https://github.com/vercel.png' />
-            <AvatarFallback>VC</AvatarFallback>
-          </Avatar>
-          <div>
-            <h4 className='text-sm font-semibold text-nowrap'>{user.name?.split(' ')[0]}</h4>
-            <div className='flex items-center'>
-              <button className='text-xs text-muted-foreground' onClick={logout}>
-                logout
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <LoadingButton isLoading={isLoadingLogin} className={width} size='sm' onClick={login}>
-          Iniciar sesión
-        </LoadingButton>
-      )}
-    </>
   )
 }
