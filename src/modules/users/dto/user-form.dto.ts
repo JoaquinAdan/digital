@@ -1,8 +1,7 @@
-// export type ClaimFormDto = Pick<Claim, 'ciudadanoId' | 'observaciones' | 'tipoIncidente' | 'origen' | 'areaServicio' | 'coordinates'>
+import { Roles } from '../models/roles'
+import { User } from '../models/user'
 
-export interface UserFormDto {
-  name: string
-  email: string
+export interface UserFormDto extends Omit<User, 'id' | 'roles'> {
+  roles: Roles[]
   password: string
-  roles: string[]
 }

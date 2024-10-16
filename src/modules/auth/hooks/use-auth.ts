@@ -1,7 +1,7 @@
 import PATHS from '@/configs/constants/paths'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
-import { LoginCredentialsDto } from '../dto/login-credentials.dto'
+import { LoginCredentialsDto } from '../models/login-credentials'
 import { User } from '../models/user'
 import { useAuthStore } from '../stores/auth-store'
 import { useCreateToken } from './use-create-token'

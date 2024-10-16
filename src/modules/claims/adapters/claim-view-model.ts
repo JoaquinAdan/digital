@@ -3,7 +3,7 @@ import { ClaimViewModel } from '../models/claims-view-model'
 
 const toClaimViewModel = (data?: Claim[]): ClaimViewModel[] => {
   if (!data) return []
-  const claim = data?.map((claim) => ({
+  const claims = data?.map(claim => ({
     'area de servicio': claim.areaServicio.descripcion,
     'tipo de incidente': claim.tipoIncidente.descripcion,
     prioridad: claim.prioridad.descripcion,
@@ -18,7 +18,7 @@ const toClaimViewModel = (data?: Claim[]): ClaimViewModel[] => {
     uuid: claim.uuid,
     coordinates: claim.coordinates,
   }))
-  return claim
+  return claims
 }
 
 export default toClaimViewModel

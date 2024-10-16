@@ -1,8 +1,17 @@
 import Sort from '@/modules/shared/components/table/sort'
 import { ColumnDef } from '@tanstack/react-table'
 import { UserViewModel } from '../models/user-view-model'
+import Actions from './actions'
 
 export const columns: ColumnDef<UserViewModel>[] = [
+  {
+    id: 'actions',
+    header: 'Acciones',
+    enableHiding: false,
+    cell: ({ row }) => {
+      return <Actions id={row.original.id} />
+    },
+  },
   {
     accessorKey: 'id',
     enableHiding: false,

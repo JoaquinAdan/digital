@@ -11,7 +11,7 @@ import { z } from 'zod'
 import { defaultLocation } from '@/configs/constants/default-location'
 import { claimDefaultValue } from '../models/claim-default-value'
 import { ClaimFormDto } from '../dto/claim-form.dto'
-import toast from 'react-hot-toast'
+// import toast from 'react-hot-toast'
 
 const formSchema = z.object({
   ciudadanoId: z.string().min(1, 'Debes escribir un titulo para el reclamo'),
@@ -40,9 +40,9 @@ const CreateClaim = () => {
   //   })
   // }
 
-  const onSuccess = () => {
-    toast.success('El reclamo ha sido registrado con exito')
-  }
+  // const onSuccess = () => {
+  //   toast.success('El reclamo ha sido registrado con exito')
+  // }
 
   const form = useForm<ClaimFormDto>({
     resolver: zodResolver(formSchema),
@@ -53,7 +53,6 @@ const CreateClaim = () => {
     console.log(values)
     form.reset()
     setOpen(false)
-    onSuccess()
   }
 
   useEffect(() => {

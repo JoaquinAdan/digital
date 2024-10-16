@@ -7,14 +7,16 @@ import type { DateRange } from 'react-day-picker'
 import { columns } from '../components/columns'
 import { UserViewModel } from '../models/user-view-model'
 import CreateUser from './create-user'
+import { useUsers } from '../hooks/use-users'
+import toUserViewModel from '../adapters/user-view-model'
 
 export default function TableUsers() {
   const [filters, setFilters] = React.useState<FilterDto>({ page: 1, limit: 10 } as FilterDto)
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const [pagination, setPagination] = React.useState({
-    pageIndex: 0,
-    pageSize: 10,
-  })
+  const [pagination, setPagination] = React.useState({ pageIndex: 0, pageSize: 10 })
+
+  const { data } = useUsers(filters)
+
   const [date, setDate] = React.useState<DateRange | undefined>()
   const [filterValue, setFilterValue] = React.useState<{ type: string; value: string; label: string }>({
     type: '',
@@ -23,18 +25,13 @@ export default function TableUsers() {
   })
 
   const queryClient = useQueryClient()
-  const data = {
-    data: [{ id: '1', nombre: 'j', email: 'e' }],
-    count: 5,
-    totalPages: 1,
-  }
 
   const table = useReactTable({
-    data: (data as { data: UserViewModel[] })?.data || [],
+    data: toUserViewModel(data?.data),
     columns,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
-    rowCount: (data as { count: number })?.count,
+    rowCount: data?.pagination.count,
     onPaginationChange: setPagination,
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -90,16 +87,16 @@ export default function TableUsers() {
 
   return (
     <TableShared<UserViewModel>
+      totalPages={data ? data?.pagination.totalPages : 1}
+      setFilterValue={setFilterValue}
+      createButton={<CreateUser />}
+      filterValue={filterValue}
+      filterType='users'
       filterBy='nombre'
       columns={columns}
-      createButton={<CreateUser />}
-      filterType='users'
-      totalPages={data ? data.totalPages : 1}
-      setFilterValue={setFilterValue}
-      filterValue={filterValue}
+      setDate={setDate}
       table={table}
       date={date}
-      setDate={setDate}
     />
   )
 }

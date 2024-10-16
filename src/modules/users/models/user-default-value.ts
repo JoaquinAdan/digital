@@ -1,5 +1,5 @@
 export const userDefaultValue = {
-  name: '',
+  username: '',
   email: '',
   password: '',
   roles: [],

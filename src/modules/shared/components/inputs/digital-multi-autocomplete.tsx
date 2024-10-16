@@ -18,7 +18,7 @@ type Props<T extends FieldValues> = {
   name: Path<T>
   label: string
   form: UseFormReturn<T>
-  options: { label: string; value: string }[] | undefined
+  options: { label: string; value: string | number; description?: string }[] | undefined
   styles?: string
   placeholder: string
 }
@@ -30,7 +30,7 @@ const DigitalMutilAutocomplete = <T extends FieldValues>({ name, label, styles, 
     control: form.control,
     name: name as ArrayPath<T>,
   })
-  console.log(fields)
+  const fieldsWithType = fields as unknown as { label: string; value: string; id: string }[]
   return (
     <>
       <FormField
@@ -65,18 +65,21 @@ const DigitalMutilAutocomplete = <T extends FieldValues>({ name, label, styles, 
                     <CommandEmpty>Ningun resultado encontrado.</CommandEmpty>
                     <CommandGroup>
                       {options?.map(option => {
-                        const isSelected = fields.find(f => f.value === option.value)
+                        const isSelected = fieldsWithType.find(f => f.value === option.value)
                         const onSelect = () => {
                           if (isSelected) {
-                            remove(fields.findIndex(f => f.value === option.value))
+                            remove(fieldsWithType.findIndex(f => f.value === option.value))
                             return
                           }
                           append(option as PathValue<T, Path<T>>)
                         }
                         return (
-                          <CommandItem value={option.label} key={option.value} onSelect={onSelect}>
-                            {option.label}
-                            <Check className={cn('ml-auto h-4 w-4', isSelected ? 'opacity-100' : 'opacity-0')} />
+                          <CommandItem value={option.label} key={option.value} onSelect={onSelect} className='flex flex-col items-start'>
+                            <div className='flex justify-between w-full gap-5'>
+                              {option.label}
+                              <Check className={cn('ml-auto h-4 w-4', isSelected ? 'opacity-100' : 'opacity-0')} />
+                            </div>
+                            <p className='text-gray-400 text-xs'>{option.description && option.description}</p>
                           </CommandItem>
                         )
                       })}
@@ -90,7 +93,7 @@ const DigitalMutilAutocomplete = <T extends FieldValues>({ name, label, styles, 
         )}
       />
       <div className={`flex flex-col gap-1 max-h-52 overflow-y-auto w-full ${styles}`}>
-        {fields.map((field, index) => (
+        {fieldsWithType.map((field, index) => (
           <div key={field.id} className='flex items-center gap-2'>
             <Button disabled={field.value === 'ciudadano'} variant='outline' onClick={() => remove(index)} size='sm'>
               X

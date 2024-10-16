@@ -1,9 +1,9 @@
-import { LoginCredentialsDto } from '../dto/login-credentials.dto'
+import { LoginCredentials } from '../models/login-credentials'
 import { apiBase } from '@/configs/constants/api-base'
 import { handler } from '@/http/handler'
 import { User } from '../models/user'
 
-export const createToken = (payload: LoginCredentialsDto): Promise<{ token: string; usuario: User }> =>
+export const createTokenHttp = (payload: LoginCredentials): Promise<{ token: string; usuario: User }> =>
   handler<{ token: string; usuario: User }>(
     fetch(`${apiBase}/auth/munidigital/login`, {
       method: 'POST',

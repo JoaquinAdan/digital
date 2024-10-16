@@ -1,5 +1,5 @@
 export interface UserViewModel {
-  id: string
+  id: number
   nombre: string
   email: string
 }

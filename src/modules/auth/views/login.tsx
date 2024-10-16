@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import useAuth from '../hooks/use-auth'
 import LoadingButton from '@/modules/shared/components/ui/loading-button'
-import { LoginCredentialsDto } from '../dto/login-credentials.dto'
+import { LoginCredentialsDto } from '../models/login-credentials'
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Por favor, ingresa un email válido.' }),
