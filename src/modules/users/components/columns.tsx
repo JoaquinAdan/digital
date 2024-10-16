@@ -1,8 +1,8 @@
 import Sort from '@/modules/shared/components/table/sort'
 import { ColumnDef } from '@tanstack/react-table'
-import { User } from '../dto/user.dto'
+import { UserViewModel } from '../models/user-view-model'
 
-export const columns: ColumnDef<User>[] = [
+export const columns: ColumnDef<UserViewModel>[] = [
   {
     accessorKey: 'id',
     enableHiding: false,
@@ -12,11 +12,11 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: 'nombre',
     header: ({ column }) => <Sort column={column} name='Nombre' />,
-    cell: ({ row }) => <>#{row.getValue('name')}</>,
+    cell: ({ row }) => <>{row.getValue('nombre')}</>,
   },
   {
     accessorKey: 'email',
     header: ({ column }) => <Sort column={column} name='Email' />,
-    cell: ({ row }) => <>#{row.getValue('email')}</>,
+    cell: ({ row }) => <>{row.getValue('email')}</>,
   },
 ]

@@ -22,7 +22,14 @@ export default function Sort<T>({ column, name }: Props<T>) {
       {isSorted ? (
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button variant='ghost' size='icon' type='button' onClick={() => column.clearSorting()}>
+            <Button
+              variant='ghost'
+              size='icon'
+              type='button'
+              onClick={() => {
+                column.clearSorting()
+              }}
+            >
               <X width={16} />
             </Button>
           </TooltipTrigger>

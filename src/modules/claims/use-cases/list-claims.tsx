@@ -39,17 +39,17 @@ export default function TableClaims() {
   })
 
   useEffect(() => {
-    setFilters((prev) => ({ ...prev, limit: table.getState().pagination.pageSize }))
+    setFilters(prev => ({ ...prev, limit: table.getState().pagination.pageSize }))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [table.getState().pagination.pageSize])
 
   useEffect(() => {
-    setFilters((prev) => ({ ...prev, page: table.getState().pagination.pageIndex + 1 }))
+    setFilters(prev => ({ ...prev, page: table.getState().pagination.pageIndex + 1 }))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [table.getState().pagination.pageIndex])
 
   useEffect(() => {
-    setFilters((prev) => ({
+    setFilters(prev => ({
       ...prev,
       filterField: filterValue?.type,
       filterValue: filterValue?.value?.toString(),
@@ -57,7 +57,7 @@ export default function TableClaims() {
   }, [filterValue])
 
   useEffect(() => {
-    setFilters((prev) => ({
+    setFilters(prev => ({
       ...prev,
       timeField: (date?.from || date?.to) && 'createdAt',
       from: date?.from?.getTime(),
@@ -66,8 +66,7 @@ export default function TableClaims() {
   }, [date])
 
   useEffect(() => {
-    if (sorting.length === 0) return
-    setFilters((prev) => ({
+    setFilters(prev => ({
       ...prev,
       sortField: sorting[0]?.id,
       sortDirection: sorting[0]?.desc && sorting ? 'DESC' : 'ASC',

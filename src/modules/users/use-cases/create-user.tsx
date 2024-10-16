@@ -3,34 +3,23 @@ import { Dialog, DialogContent, DialogDescription } from '@/modules/shared/compo
 import { Button } from '@/modules/shared/components/ui/button'
 import { Form } from '@/modules/shared/components/ui/form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import ClaimForm from '../components/form'
 import { useForm } from 'react-hook-form'
 import { Plus } from 'lucide-react'
 import React, { useEffect } from 'react'
 import { z } from 'zod'
-import { defaultLocation } from '@/configs/constants/default-location'
-import { claimDefaultValue } from '../models/claim-default-value'
-import { ClaimFormDto } from '../dto/claim-form.dto'
+import { userDefaultValue } from '../models/user-default-value'
 import toast from 'react-hot-toast'
+import { UserFormDto } from '../dto/user-form.dto'
+import UserForm from '../components/form'
 
 const formSchema = z.object({
-  ciudadanoId: z.string().min(1, 'Debes escribir un titulo para el reclamo'),
-  observaciones: z.string().min(1, 'Debes escribir una observación para el reclamo'),
-  tipoIncidente: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
-  areaServicio: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
-  origen: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
-  coordinates: z
-    .object({
-      latitude: z.number(),
-      longitude: z.number(),
-    })
-    .refine(coords => !(coords.latitude === defaultLocation[0] && coords.longitude === defaultLocation[1]), {
-      message: 'Las coordenadas específicas no están permitidas.',
-    }),
+  name: z.string().min(1, 'Debes escribir un titulo para el reclamo'),
+  email: z.string().min(1, 'Debes escribir una observación para el reclamo').email('Debes escribir un email valido'),
+  password: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
+  roles: z.array(z.string()).min(1, 'Debes seleccionar al menos un lenguaje'),
 })
 
-const CreateClaim = () => {
-  // hardcode
+const CreateUser = () => {
   const [open, setOpen] = React.useState(false)
   // const onError = () => {
   //   toast({
@@ -41,15 +30,15 @@ const CreateClaim = () => {
   // }
 
   const onSuccess = () => {
-    toast.success('El reclamo ha sido registrado con exito')
+    toast.success('El usuario ha sido registrado con exito')
   }
 
-  const form = useForm<ClaimFormDto>({
+  const form = useForm<UserFormDto>({
     resolver: zodResolver(formSchema),
-    defaultValues: claimDefaultValue,
+    defaultValues: userDefaultValue,
   })
-
-  const onSubmit = (values: ClaimFormDto) => {
+  console.log(form.watch())
+  const onSubmit = (values: UserFormDto) => {
     console.log(values)
     form.reset()
     setOpen(false)
@@ -70,12 +59,12 @@ const CreateClaim = () => {
       </DialogTrigger>
       <DialogContent className='overflow-auto max-h-[90svh] p-2 sm:p-6 rounded-md'>
         <DialogHeader>
-          <DialogTitle>Crear reclamo</DialogTitle>
-          <DialogDescription>Genere reclamo para visualizar y administrar.</DialogDescription>
+          <DialogTitle>Crear usuario</DialogTitle>
+          <DialogDescription>Genere un usuario y asignele roles</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <ClaimForm form={form} />
+            <UserForm form={form} />
             <DialogFooter>
               <Button type='submit' size='sm' onClick={() => form.handleSubmit(onSubmit)} className='mt-4'>
                 Guardar
@@ -88,4 +77,4 @@ const CreateClaim = () => {
   )
 }
 
-export default CreateClaim
+export default CreateUser

@@ -13,28 +13,23 @@ const ClaimForm = ({ form }: { form: UseFormReturn<ClaimFormDto> }) => {
   const serviceAreaCatalog = useServiceAreaCatalog()
   const originCatalog = useOriginCatalog()
 
-  if (claimsCatalog.isLoading || serviceAreaCatalog.isLoading) return <p>Cargando...</p>
+  if (claimsCatalog.isLoading || serviceAreaCatalog.isLoading || originCatalog.isLoading) return <p>Cargando...</p>
 
-  const claimsOptions = claimsCatalog.data?.data.map((c) => {
+  const claimsOptions = claimsCatalog.data?.data.map(c => {
     return { label: c.descripcion, value: c.id.toString() }
   })
 
-  const serviceAreaOptions = serviceAreaCatalog.data?.data?.map((s) => {
+  const serviceAreaOptions = serviceAreaCatalog.data?.data?.map(s => {
     return { label: s.descripcion, value: s.id.toString() }
   })
 
-  const originOptions = originCatalog.data?.data?.map((s) => {
+  const originOptions = originCatalog.data?.data?.map(s => {
     return { label: s.descripcion, value: s.id.toString() }
   })
 
   return (
     <div className='md:grid md:grid-cols-2 flex flex-col gap-2 py-0 md:gap-4 md:py-4'>
-      <DigitalInput
-        name='ciudadanoId'
-        placeholder='Escriba el nombre del ciudadano'
-        label='Titulo del reclamo'
-        form={form}
-      />
+      <DigitalInput name='ciudadanoId' placeholder='Escriba el nombre del ciudadano' label='Titulo del reclamo' form={form} />
       <DigitalAutocomplete
         name='tipoIncidente'
         options={claimsOptions}

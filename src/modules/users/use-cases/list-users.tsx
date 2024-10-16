@@ -1,11 +1,12 @@
+import TableShared from '@/modules/shared/components/table/table'
+import { FilterDto } from '@/modules/shared/models/filter'
 import { useQueryClient } from '@tanstack/react-query'
 import { SortingState, getCoreRowModel, getFilteredRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
 import React, { useEffect } from 'react'
 import type { DateRange } from 'react-day-picker'
-import { User } from '../dto/user.dto'
 import { columns } from '../components/columns'
-import { FilterDto } from '@/modules/shared/models/filter'
-import TableShared from '@/modules/shared/components/table/table'
+import { UserViewModel } from '../models/user-view-model'
+import CreateUser from './create-user'
 
 export default function TableUsers() {
   const [filters, setFilters] = React.useState<FilterDto>({ page: 1, limit: 10 } as FilterDto)
@@ -23,13 +24,13 @@ export default function TableUsers() {
 
   const queryClient = useQueryClient()
   const data = {
-    data: [],
+    data: [{ id: '1', nombre: 'j', email: 'e' }],
     count: 5,
     totalPages: 1,
   }
 
   const table = useReactTable({
-    data: (data as { data: User[] })?.data || [],
+    data: (data as { data: UserViewModel[] })?.data || [],
     columns,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
@@ -42,17 +43,17 @@ export default function TableUsers() {
   })
 
   useEffect(() => {
-    setFilters((prev) => ({ ...prev, limit: table.getState().pagination.pageSize }))
+    setFilters(prev => ({ ...prev, limit: table.getState().pagination.pageSize }))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [table.getState().pagination.pageSize])
 
   useEffect(() => {
-    setFilters((prev) => ({ ...prev, page: table.getState().pagination.pageIndex + 1 }))
+    setFilters(prev => ({ ...prev, page: table.getState().pagination.pageIndex + 1 }))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [table.getState().pagination.pageIndex])
 
   useEffect(() => {
-    setFilters((prev) => ({
+    setFilters(prev => ({
       ...prev,
       filterField: filterValue?.type,
       filterValue: filterValue?.value?.toString(),
@@ -60,7 +61,7 @@ export default function TableUsers() {
   }, [filterValue])
 
   useEffect(() => {
-    setFilters((prev) => ({
+    setFilters(prev => ({
       ...prev,
       timeField: (date?.from || date?.to) && 'createdAt',
       from: date?.from?.getTime(),
@@ -69,7 +70,7 @@ export default function TableUsers() {
   }, [date])
 
   useEffect(() => {
-    setFilters((prev) => ({
+    setFilters(prev => ({
       ...prev,
       sortField:
         sorting[0]?.id === 'area'
@@ -88,9 +89,10 @@ export default function TableUsers() {
   }, [filters, queryClient])
 
   return (
-    <TableShared<User>
+    <TableShared<UserViewModel>
       filterBy='nombre'
       columns={columns}
+      createButton={<CreateUser />}
       filterType='users'
       totalPages={data ? data.totalPages : 1}
       setFilterValue={setFilterValue}

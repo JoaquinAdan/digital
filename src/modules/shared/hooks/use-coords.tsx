@@ -6,9 +6,7 @@ import { NominatimForm } from '../models/nominatim-form'
 export const useCoords = (onSuccess: (data: NominatimResponse[]) => void) => {
   const coords = useMutation<NominatimResponse[], unknown, NominatimForm>({
     mutationFn: async (payload: NominatimForm) => getCoordsHttp(payload),
-    onSuccess: (data) => {
-      onSuccess(data)
-    },
+    onSuccess,
   })
 
   return coords

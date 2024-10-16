@@ -14,12 +14,12 @@ const LoginButton = ({ width }: { width: string }) => {
           <Avatar>
             <AvatarImage src='https://github.com/vercel.png' />
             <AvatarFallback className='bg-purple-200'>
-              {user?.name?.split(' ')?.[0]?.[0]}
-              {user?.name?.split(' ')?.[1]?.[0]}
+              {user?.username?.split(' ')?.[0]?.[0]}
+              {user?.username?.split(' ')?.[1]?.[0]}
             </AvatarFallback>
           </Avatar>
           <div>
-            <h4 className='text-sm font-semibold text-nowrap'>{user.name?.split(' ')[0]}</h4>
+            <h4 className='text-sm font-semibold text-nowrap'>{user.username?.split(' ')[0]}</h4>
             <div className='flex items-center'>
               <button className='text-xs text-muted-foreground whitespace-nowrap' onClick={logout}>
                 cerrar sesión

@@ -1,8 +1,8 @@
 import PATHS from '@/configs/constants/paths'
-import { userMock } from '@/mocks/user'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { LoginCredentialsDto } from '../dto/login-credentials.dto'
+import { User } from '../models/user'
 import { useAuthStore } from '../stores/auth-store'
 import { useCreateToken } from './use-create-token'
 
@@ -11,8 +11,9 @@ const useAuth = () => {
   const { user, setUser, token, setToken } = useAuthStore()
   const navigate = useNavigate()
 
-  const onSuccess = (data: { token: string }) => {
-    setUser(userMock)
+  const onSuccess = (data: { token: string; usuario: User }) => {
+    console.log(data)
+    setUser(data.usuario)
     setToken(data.token)
     navigate(PATHS.PUBLIC.HOME)
   }
