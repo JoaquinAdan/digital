@@ -22,11 +22,12 @@ import { UserFormDto } from '../dto/user-form.dto'
 import { useUserById } from '../hooks/use-user'
 import { GET_USERS } from '../hooks/use-users'
 import { userDefaultValue } from '../models/user-default-value'
+import { useUpdateUser } from '../hooks/use-update-user'
 
 const formSchema = z.object({
   username: z.string().min(1, 'Debes escribir nombre'),
   email: z.string().min(1, 'Debes escribir un email').email('Debes escribir un email valido'),
-  password: z.string().min(1, 'Debes escribir una contraseña'),
+  password: z.string().min(0).optional(),
   roles: z.array(
     z.object({
       value: z.number(),
@@ -36,19 +37,19 @@ const formSchema = z.object({
   ),
 })
 
-const UpdateUser = ({ id }: { id: number }) => {
+const UpdateUser = React.memo(({ id }: { id: number }) => {
   const [open, setOpen] = React.useState(false)
-
   const queryClient = useQueryClient()
 
   const data = useUserById(id, open)
-  console.log(data?.data?.usuario)
 
-  const onError = () => toast.error('Ha ocurrido un error al registrar el evento')
+  const onError = () => toast.error('Ha ocurrido un error al actualizar el usuario')
   const onSuccess = () => {
-    toast.success('El usuario ha sido registrado con exito')
+    toast.success('El usuario ha sido actualizado con exito')
     queryClient.invalidateQueries({ queryKey: [GET_USERS] })
   }
+
+  const mutation = useUpdateUser(onSuccess, onError)
 
   const form = useForm<UserFormDto>({
     resolver: zodResolver(formSchema),
@@ -56,22 +57,21 @@ const UpdateUser = ({ id }: { id: number }) => {
   })
 
   const onSubmit = (values: UserFormDto) => {
-    console.log(values)
-    form.reset()
+    mutation.mutate({ payload: values, id })
     setOpen(false)
-    onSuccess()
-    onError()
+    form.reset()
   }
 
   useEffect(() => {
     form.reset({
-      username: data?.data?.usuario?.username,
-      email: data?.data?.usuario?.email,
+      username: data?.data?.usuario?.username || '',
+      email: data?.data?.usuario?.email || '',
       password: '',
-      roles: data?.data?.usuario?.roles.map(r => ({ value: r.id, description: r.descripcion, label: r.displayName })),
+      roles: data?.data?.usuario?.roles.map(r => ({ value: r.id, description: r.descripcion, label: r.displayName })) || [],
     })
-  }, [open, form])
+  }, [form, data?.data])
 
+  if (!id && !open) return null
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <Tooltip>
@@ -104,6 +104,6 @@ const UpdateUser = ({ id }: { id: number }) => {
       </DialogContent>
     </Dialog>
   )
-}
+})
 
 export default UpdateUser

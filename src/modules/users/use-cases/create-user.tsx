@@ -47,7 +47,6 @@ const CreateUser = () => {
   })
 
   const onSubmit = (values: UserFormDto) => {
-    console.log(values)
     mutation.mutate(values)
     form.reset()
     setOpen(false)

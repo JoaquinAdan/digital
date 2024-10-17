@@ -2,11 +2,11 @@ import { apiBase } from '@/configs/constants/api-base'
 import { UserFormDto } from '../dto/user-form.dto'
 import { handler } from '@/http/handler'
 
-export const postUserHttp = (payload: UserFormDto, token: string): Promise<unknown> => {
+export const putUserHttp = (payload: UserFormDto, token: string, id: number): Promise<unknown> => {
   console.log(payload)
   return handler(
-    fetch(`${apiBase}/Usuarios`, {
-      method: 'POST',
+    fetch(`${apiBase}/Usuarios/${id}`, {
+      method: 'PUT',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
