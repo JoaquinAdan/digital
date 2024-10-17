@@ -9,14 +9,32 @@ import {
   DialogTrigger,
 } from '@/modules/shared/components/ui/dialog'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
+import { useQueryClient } from '@tanstack/react-query'
 import { Trash2 } from 'lucide-react'
 import React from 'react'
+import { useDeleteClaim } from '../hooks/use-delete-claim'
+import toast from 'react-hot-toast'
+import { GET_CLAIMS } from '../hooks/use-claims'
+import LoadingButton from '@/modules/shared/components/ui/loading-button'
 
 const DeleteClaim = ({ id }: { id?: string }) => {
   const [open, setOpen] = React.useState(false)
+
+  const queryClient = useQueryClient()
+
+  const onError = () => toast.error('Ha ocurrido un error al registrar el reclamo')
+  const onSuccess = () => {
+    toast.success('El reclamo ha sido registrado con exito')
+    queryClient.invalidateQueries({ queryKey: [GET_CLAIMS] })
+  }
+
+  const mutation = useDeleteClaim(onSuccess, onError)
+
   const removeClaim = () => {
     setOpen(false)
+    mutation.mutate(id)
   }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <Tooltip>
@@ -39,9 +57,9 @@ const DeleteClaim = ({ id }: { id?: string }) => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button type='submit' variant='destructive' size='sm' onClick={removeClaim}>
+          <LoadingButton isLoading={mutation.isPending} type='submit' variant='destructive' size='sm' onClick={removeClaim}>
             Eliminar
-          </Button>
+          </LoadingButton>
         </DialogFooter>
       </DialogContent>
     </Dialog>

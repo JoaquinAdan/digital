@@ -9,7 +9,7 @@ export const userMock = {
     },
     // {
     //   name: 'InspectorReclamos',
-    //   permissions: [{ scope: 'reclamos', resource: 'detail', action: 'authorize' }],
+    //   permissions: [{ scope: 'reclamos', resource: 'detalle', action: 'authorize' }],
     // },
     // {
     //   name: 'ServicioSocialEncuestas',

@@ -14,15 +14,14 @@ export default function TableUsers() {
   const [filters, setFilters] = React.useState<FilterDto>({ page: 1, limit: 10 } as FilterDto)
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [pagination, setPagination] = React.useState({ pageIndex: 0, pageSize: 10 })
-
-  const { data } = useUsers(filters)
-
   const [date, setDate] = React.useState<DateRange | undefined>()
   const [filterValue, setFilterValue] = React.useState<{ type: string; value: string; label: string }>({
     type: '',
     value: '',
     label: '',
   })
+
+  const { data } = useUsers(filters)
 
   const queryClient = useQueryClient()
 

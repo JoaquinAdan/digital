@@ -23,6 +23,7 @@ import { useUserById } from '../hooks/use-user'
 import { GET_USERS } from '../hooks/use-users'
 import { userDefaultValue } from '../models/user-default-value'
 import { useUpdateUser } from '../hooks/use-update-user'
+import LoadingButton from '@/modules/shared/components/ui/loading-button'
 
 const formSchema = z.object({
   username: z.string().min(1, 'Debes escribir nombre'),
@@ -95,9 +96,9 @@ const UpdateUser = React.memo(({ id }: { id: number }) => {
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <UserForm form={form} id={id} />
             <DialogFooter>
-              <Button type='submit' size='sm' className='mt-4'>
+              <LoadingButton isLoading={mutation.isPending} type='submit' size='sm' className='mt-4'>
                 Guardar
-              </Button>
+              </LoadingButton>
             </DialogFooter>
           </form>
         </Form>

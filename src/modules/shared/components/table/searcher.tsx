@@ -15,7 +15,7 @@ export default function Searcher<T>({ table, totalPages, setFilterValue: setFilt
       key={totalPages}
       placeholder={`Filtrar por ${filterBy}`}
       value={totalPages < 2 ? (table.getColumn(filterBy)?.getFilterValue() as string) : filterValue.value}
-      onChange={(event) =>
+      onChange={event =>
         totalPages < 2
           ? table.getColumn(filterBy)?.setFilterValue(event.target.value)
           : setFilter({ type: filterBy, value: event.target.value, label: '' })

@@ -1,10 +1,10 @@
 import PATHS from '@/configs/constants/paths'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
-import { LoginCredentialsDto } from '../models/login-credentials'
 import { User } from '../models/user'
 import { useAuthStore } from '../stores/auth-store'
 import { useCreateToken } from './use-create-token'
+import { LoginCredentials } from '../models/login-credentials'
 
 const useAuth = () => {
   const [errorLoading, setErrorLoading] = useState<string | undefined>(undefined)
@@ -24,7 +24,7 @@ const useAuth = () => {
 
   const mutation = useCreateToken(onSuccess, onError)
 
-  const login = (credentials: LoginCredentialsDto) => {
+  const login = (credentials: LoginCredentials) => {
     mutation.mutate(credentials)
   }
 

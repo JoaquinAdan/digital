@@ -1,19 +1,19 @@
-import { DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/modules/shared/components/ui/dialog'
-import { Dialog, DialogContent, DialogDescription } from '@/modules/shared/components/ui/dialog'
 import { Button } from '@/modules/shared/components/ui/button'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/modules/shared/components/ui/dialog'
 import { Form } from '@/modules/shared/components/ui/form'
+import LoadingButton from '@/modules/shared/components/ui/loading-button'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { useQueryClient } from '@tanstack/react-query'
 import { Plus } from 'lucide-react'
 import React, { useEffect } from 'react'
-import { z } from 'zod'
-import { userDefaultValue } from '../models/user-default-value'
+import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import { UserFormDto } from '../dto/user-form.dto'
+import { z } from 'zod'
 import UserForm from '../components/form'
+import { UserFormDto } from '../dto/user-form.dto'
 import { useCreateUser } from '../hooks/use-create-user'
-import { useQueryClient } from '@tanstack/react-query'
 import { GET_USERS } from '../hooks/use-users'
+import { userDefaultValue } from '../models/user-default-value'
 
 const formSchema = z.object({
   username: z.string().min(1, 'Debes escribir nombre'),
@@ -73,9 +73,9 @@ const CreateUser = () => {
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <UserForm form={form} />
             <DialogFooter>
-              <Button type='submit' size='sm' className='mt-4'>
+              <LoadingButton isLoading={mutation.isPending} type='submit' size='sm' className='mt-4'>
                 Guardar
-              </Button>
+              </LoadingButton>
             </DialogFooter>
           </form>
         </Form>
