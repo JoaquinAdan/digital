@@ -51,7 +51,7 @@ const CreateUser = () => {
     form.reset()
     setOpen(false)
   }
-  console.log(form.watch())
+
   useEffect(() => {
     form.reset()
   }, [open, form])
@@ -73,7 +73,7 @@ const CreateUser = () => {
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <UserForm form={form} />
             <DialogFooter>
-              <Button type='submit' size='sm' onClick={() => form.handleSubmit(onSubmit)} className='mt-4'>
+              <Button type='submit' size='sm' className='mt-4'>
                 Guardar
               </Button>
             </DialogFooter>

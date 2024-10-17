@@ -1,13 +1,13 @@
-import { ArrowUp } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
-import { Button } from '../ui/button'
+// import { ArrowUp } from 'lucide-react'
+// import { Button } from '../ui/button'
 
 const Footer = () => {
   return (
     <>
-      <Button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className='fixed right-2 bottom-2' variant='ghost'>
+      {/* <Button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className='fixed right-2 bottom-2' variant='ghost'>
         <ArrowUp className='h-5 w-5 text-purple-700' />
-      </Button>
+      </Button> */}
       <div className='mt-2 mb-1 flex justify-center'>
         <p className='font-bold text-gray-700'>Copyright © {new Date().getFullYear()}</p>
         <p className='mx-1 font-bold text-gray-700 hidden sm:block'>-</p>

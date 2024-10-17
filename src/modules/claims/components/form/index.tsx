@@ -7,13 +7,17 @@ import { useClaimsCatalog } from '../../hooks/use-claims-catalog'
 import { useOriginCatalog } from '../../hooks/use-origin-catalog'
 import { useServiceAreaCatalog } from '../../hooks/use-service-area-catalog'
 import MapSearcher from '../../../shared/components/maps/searcher'
+import { useNeighborhoodCatalog } from '@/modules/shared/hooks/use-neighborhood-catalog'
 
 const ClaimForm = ({ form }: { form: UseFormReturn<ClaimFormDto> }) => {
-  const claimsCatalog = useClaimsCatalog()
+  const neighborhoodCatalog = useNeighborhoodCatalog()
   const serviceAreaCatalog = useServiceAreaCatalog()
+  const claimsCatalog = useClaimsCatalog()
   const originCatalog = useOriginCatalog()
 
-  if (claimsCatalog.isLoading || serviceAreaCatalog.isLoading || originCatalog.isLoading) return <p>Cargando...</p>
+  if (claimsCatalog.isLoading || serviceAreaCatalog.isLoading || originCatalog.isLoading || neighborhoodCatalog.isLoading) {
+    return <p>Cargando...</p>
+  }
 
   const claimsOptions = claimsCatalog.data?.data.map(c => {
     return { label: c.descripcion, value: c.id.toString() }
@@ -23,19 +27,25 @@ const ClaimForm = ({ form }: { form: UseFormReturn<ClaimFormDto> }) => {
     return { label: s.descripcion, value: s.id.toString() }
   })
 
-  const originOptions = originCatalog.data?.data?.map(s => {
-    return { label: s.descripcion, value: s.id.toString() }
+  const originOptions = originCatalog.data?.data?.map(o => {
+    return { label: o.descripcion, value: o.id.toString() }
+  })
+
+  const neighborhoodOptions = neighborhoodCatalog.data?.map(n => {
+    return { label: n.descripcion, value: n.id.toString() }
   })
 
   return (
     <div className='md:grid md:grid-cols-2 flex flex-col gap-2 py-0 md:gap-4 md:py-4'>
-      <DigitalInput name='ciudadanoId' placeholder='Escriba el nombre del ciudadano' label='Titulo del reclamo' form={form} />
+      <DigitalInput name='direccion' placeholder='Direccion' label='Dirección' form={form} />
+      <DigitalAutocomplete name='barrio' options={neighborhoodOptions} form={form} label='Barrio' placeholder='barrio' />
+      <DigitalAutocomplete name='prioridad' options={[]} form={form} label='Prioridad' placeholder='prioridad' />
       <DigitalAutocomplete
         name='tipoIncidente'
         options={claimsOptions}
         form={form}
         label='Tipo de reclamo'
-        placeholder='reclamo'
+        placeholder='tipo de reclamo'
       />
       <DigitalAutocomplete
         name='areaServicio'

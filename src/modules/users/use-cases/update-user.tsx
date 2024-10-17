@@ -83,19 +83,19 @@ const UpdateUser = React.memo(({ id }: { id: number }) => {
           </DialogTrigger>
         </TooltipTrigger>
         <TooltipContent>
-          <p>Editar</p>
+          <p>Actualizar</p>
         </TooltipContent>
       </Tooltip>
       <DialogContent className='overflow-auto max-h-[90svh] p-2 sm:p-6 rounded-md'>
         <DialogHeader>
-          <DialogTitle>Crear usuario</DialogTitle>
-          <DialogDescription>Genere un usuario y asignele roles</DialogDescription>
+          <DialogTitle>Actualizar usuario</DialogTitle>
+          <DialogDescription>Actualice un usuario o sus roles</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <UserForm form={form} />
+            <UserForm form={form} id={id} />
             <DialogFooter>
-              <Button type='submit' size='sm' onClick={() => form.handleSubmit(onSubmit)} className='mt-4'>
+              <Button type='submit' size='sm' className='mt-4'>
                 Guardar
               </Button>
             </DialogFooter>

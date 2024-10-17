@@ -36,9 +36,11 @@ const DigitalAutocomplete = <T extends FieldValues>({ name, label, styles, form,
             <PopoverTrigger asChild>
               <FormControl>
                 <Button variant='outline' role='combobox' className='w-full normal-case justify-between'>
-                  {field.value ? options?.find(option => option.value === field.value)?.label : `Selecciona ${placeholder}`}
+                  <p className={`max-w-[${styles === 'col-span-2' ? '462px' : '219px'}] truncate`}>
+                    {field.value ? options?.find(option => option.value === field.value)?.label : `Selecciona ${placeholder}`}
+                  </p>
                   <ChevronRight
-                    className={`ml-2 h-4 w-4 shrink-0 opacity-50 transition-all ${open ? 'rotate-90' : 'rotate-0  '}`}
+                    className={`ml-2 h-4 w-4 shrink-0 opacity-50 transition-all ${open ? 'rotate-90' : 'rotate-0'}`}
                   />
                 </Button>
               </FormControl>
@@ -55,15 +57,19 @@ const DigitalAutocomplete = <T extends FieldValues>({ name, label, styles, form,
                 <CommandList>
                   <CommandEmpty>Ningun resultado encontrado.</CommandEmpty>
                   <CommandGroup>
-                    {options?.map(option => (
+                    {options?.map((option, i) => (
                       <CommandItem
                         value={option.label}
                         key={option.value}
                         onSelect={() => {
                           form.setValue(name, option.value as PathValue<T, Path<T>>)
+                          form.clearErrors(name)
                         }}
+                        className={`gap-2 ${options.length - 1 !== i && 'border-b-[1px]'}`}
                       >
-                        {option.label}
+                        <p className={`max-w-[${styles === 'col-span-2' ? '462px' : '219px'}] whitespace-break-spaces`}>
+                          {option.label}
+                        </p>
                         <Check className={cn('ml-auto h-4 w-4', option.value === field.value ? 'opacity-100' : 'opacity-0')} />
                       </CommandItem>
                     ))}

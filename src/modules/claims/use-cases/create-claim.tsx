@@ -11,10 +11,13 @@ import { z } from 'zod'
 import { defaultLocation } from '@/configs/constants/default-location'
 import { claimDefaultValue } from '../models/claim-default-value'
 import { ClaimFormDto } from '../dto/claim-form.dto'
-// import toast from 'react-hot-toast'
+import toast from 'react-hot-toast'
+import { useQueryClient } from '@tanstack/react-query'
+import { GET_CLAIMS } from '../hooks/use-claims'
+import { useCreateClaim } from '../hooks/use-create-claim'
 
 const formSchema = z.object({
-  ciudadanoId: z.string().min(1, 'Debes escribir un titulo para el reclamo'),
+  ciudadano: z.string().min(1, 'Debes escribir un titulo para el reclamo'),
   observaciones: z.string().min(1, 'Debes escribir una observación para el reclamo'),
   tipoIncidente: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
   areaServicio: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
@@ -27,22 +30,23 @@ const formSchema = z.object({
     .refine(coords => !(coords.latitude === defaultLocation[0] && coords.longitude === defaultLocation[1]), {
       message: 'Las coordenadas específicas no están permitidas.',
     }),
+  barrio: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
+  direccion: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
+  prioridad: z.string().min(1, 'Debes seleccionar al menos un lenguaje'),
 })
 
 const CreateClaim = () => {
-  // hardcode
   const [open, setOpen] = React.useState(false)
-  // const onError = () => {
-  //   toast({
-  //     title: 'Error al registrar evento',
-  //     description: 'Ha ocurrido un error al registrar el evento',
-  //     variant: 'destructive',
-  //   })
-  // }
 
-  // const onSuccess = () => {
-  //   toast.success('El reclamo ha sido registrado con exito')
-  // }
+  const queryClient = useQueryClient()
+
+  const onError = () => toast.error('Ha ocurrido un error al registrar el reclamo')
+  const onSuccess = () => {
+    toast.success('El reclamo ha sido registrado con exito')
+    queryClient.invalidateQueries({ queryKey: [GET_CLAIMS] })
+  }
+
+  const mutation = useCreateClaim(onSuccess, onError)
 
   const form = useForm<ClaimFormDto>({
     resolver: zodResolver(formSchema),
@@ -50,15 +54,17 @@ const CreateClaim = () => {
   })
 
   const onSubmit = (values: ClaimFormDto) => {
-    console.log(values)
+    mutation.mutate(values)
     form.reset()
     setOpen(false)
+    onError()
+    onSuccess()
   }
 
   useEffect(() => {
     form.reset()
   }, [open, form])
-
+  console.log(form.watch())
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -76,7 +82,7 @@ const CreateClaim = () => {
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <ClaimForm form={form} />
             <DialogFooter>
-              <Button type='submit' size='sm' onClick={() => form.handleSubmit(onSubmit)} className='mt-4'>
+              <Button type='submit' size='sm' className='mt-4'>
                 Guardar
               </Button>
             </DialogFooter>

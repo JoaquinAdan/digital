@@ -6,4 +6,7 @@ export interface ClaimFormDto extends Pick<Claim, 'ciudadanoId' | 'observaciones
   tipoIncidente: string
   areaServicio: string
   origen: string
+  prioridad: string
+  barrio: string
+  direccion: string
 }

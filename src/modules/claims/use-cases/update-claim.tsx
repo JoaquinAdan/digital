@@ -32,7 +32,7 @@ const formSchema = z.object({
       latitude: z.number(),
       longitude: z.number(),
     })
-    .refine((coords) => !(coords.latitude === defaultLocation[0] && coords.longitude === defaultLocation[1]), {
+    .refine(coords => !(coords.latitude === defaultLocation[0] && coords.longitude === defaultLocation[1]), {
       message: 'Las coordenadas específicas no están permitidas.',
     }),
 })
@@ -93,7 +93,7 @@ const UpdateClaim = ({ id }: { id?: string }) => {
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <ClaimForm form={form} />
             <DialogFooter>
-              <Button type='submit' size='sm' onClick={() => form.handleSubmit(onSubmit)}>
+              <Button type='submit' size='sm'>
                 Guardar
               </Button>
             </DialogFooter>

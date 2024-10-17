@@ -35,14 +35,14 @@ const MapSearcher = <T extends FieldValues>({ form, title }: Props<T>) => {
     longitude: form.watch('coordinates.longitude' as Path<T>),
   })
 
-  const mutation = useCoords((data) => {
+  const mutation = useCoords(data => {
     if (data.length > 0) {
       form.setValue(
         'coordinates' as Path<T>,
         {
           latitude: Number(data[0]?.lat),
           longitude: Number(data[0]?.lon),
-        } as PathValue<T, Path<T>>
+        } as PathValue<T, Path<T>>,
       )
     } else toast.error('No se encontró la ubicación')
     setIsCoordsChanged(false)
@@ -71,7 +71,7 @@ const MapSearcher = <T extends FieldValues>({ form, title }: Props<T>) => {
   const data = useNeighborhood(
     form.watch('coordinates.latitude' as Path<T>),
     form.watch('coordinates.longitude' as Path<T>),
-    isCoordsChanged
+    isCoordsChanged,
   )
 
   useEffect(() => {
@@ -83,34 +83,11 @@ const MapSearcher = <T extends FieldValues>({ form, title }: Props<T>) => {
   return (
     <div>
       <FormLabel>Ubicación del {title}:</FormLabel>
-      <div className='grid grid-cols-2 md:flex md:items-end gap-2 mb-2'>
-        <DigitalInput name='street' placeholder='Nombre de la calle' label='Calle' form={nominatimForm} />
-        <DigitalInput name='city' placeholder='Nombre de la ciudad' label='Ciudad' form={nominatimForm} />
-        <LoadingButton
-          onClick={nominatimForm.handleSubmit(onSubmit)}
-          isLoading={mutation.isPending}
-          className='col-span-2'
-          variant='outline'
-          type='button'
-        >
-          Buscar
-        </LoadingButton>
-      </div>
-      <p className='text-gray-400 text-xs mb-2'>Utiliza estos inputs para geolocalizar la ubicación del {title}</p>
 
       <InputLayout name={'coordinates' as Path<T>} form={form} styles='col-span-2'>
         <>
-          {data.isRefetching ? (
-            <Skeleton className='h-[400px] w-full rounded-xl bg-gray-300' />
-          ) : (
-            <MapSelector
-              key={mutation.data?.[0]?.place_id ?? 'default-key'}
-              value={[form.watch('coordinates.latitude' as Path<T>), form.watch('coordinates.longitude' as Path<T>)]}
-              setValue={form.setValue}
-            />
-          )}
           <div
-            className='w-full border-l-[1px] border-b-[1px] border-r-[1px] rounded-b-md p-1 md:p-2 text-left'
+            className='w-full border-l-[1px] border-t-[1px] border-r-[1px] rounded-b-md p-1 md:p-2 text-left'
             style={{ marginTop: '-2px' }}
           >
             <p className='font-medium'>
@@ -129,8 +106,31 @@ const MapSearcher = <T extends FieldValues>({ form, title }: Props<T>) => {
               </span>
             </p>
           </div>
+          {data.isRefetching ? (
+            <Skeleton className='h-[400px] w-full rounded-xl bg-gray-300' />
+          ) : (
+            <MapSelector
+              key={mutation.data?.[0]?.place_id ?? 'default-key'}
+              value={[form.watch('coordinates.latitude' as Path<T>), form.watch('coordinates.longitude' as Path<T>)]}
+              setValue={form.setValue}
+            />
+          )}
         </>
       </InputLayout>
+      <div className='grid grid-cols-2 md:flex md:items-end gap-2 mt-2'>
+        <DigitalInput name='street' placeholder='Nombre de la calle' label='Calle' form={nominatimForm} />
+        <DigitalInput name='city' placeholder='Nombre de la ciudad' label='Ciudad' form={nominatimForm} />
+        <LoadingButton
+          onClick={nominatimForm.handleSubmit(onSubmit)}
+          isLoading={mutation.isPending}
+          className='col-span-2'
+          variant='outline'
+          type='button'
+        >
+          Buscar
+        </LoadingButton>
+      </div>
+      <p className='text-gray-400 text-xs mb-2'>Utiliza estos inputs para geolocalizar la ubicación del {title}</p>
     </div>
   )
 }

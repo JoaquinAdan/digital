@@ -64,7 +64,7 @@ const DigitalMutilAutocomplete = <T extends FieldValues>({ name, label, styles, 
                   <CommandList>
                     <CommandEmpty>Ningun resultado encontrado.</CommandEmpty>
                     <CommandGroup>
-                      {options?.map(option => {
+                      {options?.map((option, i) => {
                         const isSelected = fieldsWithType.find(f => f.value === option.value)
                         const onSelect = () => {
                           if (isSelected) {
@@ -74,7 +74,12 @@ const DigitalMutilAutocomplete = <T extends FieldValues>({ name, label, styles, 
                           append(option as PathValue<T, Path<T>>)
                         }
                         return (
-                          <CommandItem value={option.label} key={option.value} onSelect={onSelect} className='flex flex-col items-start'>
+                          <CommandItem
+                            value={option.label}
+                            key={option.value}
+                            onSelect={onSelect}
+                            className={`flex flex-col items-start ${options.length - 1 !== i && 'border-b-[1px]'}`}
+                          >
                             <div className='flex justify-between w-full gap-5'>
                               {option.label}
                               <Check className={cn('ml-auto h-4 w-4', isSelected ? 'opacity-100' : 'opacity-0')} />

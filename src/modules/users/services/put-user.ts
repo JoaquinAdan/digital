@@ -3,7 +3,6 @@ import { UserFormDto } from '../dto/user-form.dto'
 import { handler } from '@/http/handler'
 
 export const putUserHttp = (payload: UserFormDto, token: string, id: number): Promise<unknown> => {
-  console.log(payload)
   return handler(
     fetch(`${apiBase}/Usuarios/${id}`, {
       method: 'PUT',
@@ -14,7 +13,7 @@ export const putUserHttp = (payload: UserFormDto, token: string, id: number): Pr
       body: JSON.stringify({
         Email: payload.email,
         Username: payload.username,
-        Password: payload.password,
+        Password: payload.password === '' ? undefined : payload.password,
         RoleIds: payload.roles.map(role => role.value),
       }),
     }),
