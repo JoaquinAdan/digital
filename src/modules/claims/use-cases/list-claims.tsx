@@ -6,7 +6,7 @@ import React, { useEffect } from 'react'
 import type { DateRange } from 'react-day-picker'
 import toClaimViewModel from '../adapters/claim-view-model'
 import { columns } from '../components/columns'
-import { useClaims } from '../hooks/use-claims'
+import { GET_CLAIMS, useClaims } from '../hooks/use-claims'
 import { ClaimViewModel } from '../models/claims-view-model'
 import CreateClaim from './create-claim'
 
@@ -74,7 +74,7 @@ export default function TableClaims() {
   }, [sorting])
 
   useEffect(() => {
-    queryClient.invalidateQueries({ queryKey: ['hola'] })
+    queryClient.invalidateQueries({ queryKey: [GET_CLAIMS] })
   }, [filters, queryClient])
 
   return (

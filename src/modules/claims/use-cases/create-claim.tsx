@@ -57,14 +57,13 @@ const CreateClaim = () => {
     mutation.mutate(values)
     form.reset()
     setOpen(false)
-    onError()
-    onSuccess()
   }
 
   useEffect(() => {
     form.reset()
   }, [open, form])
   console.log(form.watch())
+  console.log(form.formState.errors)
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>

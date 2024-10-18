@@ -7,7 +7,7 @@ import type { DateRange } from 'react-day-picker'
 import { columns } from '../components/columns'
 import { UserViewModel } from '../models/user-view-model'
 import CreateUser from './create-user'
-import { useUsers } from '../hooks/use-users'
+import { GET_USERS, useUsers } from '../hooks/use-users'
 import toUserViewModel from '../adapters/user-view-model'
 
 export default function TableUsers() {
@@ -47,7 +47,7 @@ export default function TableUsers() {
     setFilters(prev => ({ ...prev, page: table.getState().pagination.pageIndex + 1 }))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [table.getState().pagination.pageIndex])
-
+  console.log(filterValue)
   useEffect(() => {
     setFilters(prev => ({
       ...prev,
@@ -68,20 +68,13 @@ export default function TableUsers() {
   useEffect(() => {
     setFilters(prev => ({
       ...prev,
-      sortField:
-        sorting[0]?.id === 'area'
-          ? 'areaId'
-          : sorting[0]?.id === 'event'
-          ? 'eventId'
-          : sorting[0]?.id === 'wasResolved'
-          ? 'resolved'
-          : sorting[0]?.id,
+      sortField: sorting[0]?.id,
       sortDirection: sorting[0]?.desc && sorting ? 'DESC' : 'ASC',
     }))
   }, [sorting])
 
   useEffect(() => {
-    queryClient.invalidateQueries({ queryKey: ['hola'] })
+    queryClient.invalidateQueries({ queryKey: [GET_USERS] })
   }, [filters, queryClient])
 
   return (

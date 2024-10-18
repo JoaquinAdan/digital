@@ -15,11 +15,12 @@ export default function Searcher<T>({ table, totalPages, setFilterValue: setFilt
       key={totalPages}
       placeholder={`Filtrar por ${filterBy}`}
       value={totalPages < 2 ? (table.getColumn(filterBy)?.getFilterValue() as string) : filterValue.value}
-      onChange={event =>
-        totalPages < 2
+      onChange={event => {
+        event.preventDefault()
+        return totalPages < 2
           ? table.getColumn(filterBy)?.setFilterValue(event.target.value)
           : setFilter({ type: filterBy, value: event.target.value, label: '' })
-      }
+      }}
       className='max-w-sm w-full sm:w-[300px]'
     />
   )

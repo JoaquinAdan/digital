@@ -4,6 +4,23 @@ import Actions from './actions'
 import { Badge } from '@/modules/shared/components/ui/badge'
 import { ClaimViewModel } from '../models/claims-view-model'
 
+const estadoMap: { [key: number]: string } = {
+  1: 'CREADO',
+  2: 'RECHAZADO',
+  3: 'EN INSPECCION',
+  4: 'ACEPTADO',
+  5: 'FINALIZADO',
+  6: 'ANULADO',
+}
+const estadoVariantMap: { [key: number]: 'outline' | 'destructive' | 'default' | 'secondary' } = {
+  1: 'outline',
+  2: 'destructive',
+  3: 'secondary',
+  4: 'default',
+  5: 'default',
+  6: 'destructive',
+}
+
 export const columns: ColumnDef<ClaimViewModel>[] = [
   {
     id: 'actions',
@@ -22,15 +39,16 @@ export const columns: ColumnDef<ClaimViewModel>[] = [
     accessorKey: 'estado',
     header: ({ column }) => <Sort column={column} name='Estado' />,
     cell: ({ row }) => (
-      <Badge variant={row.getValue('estado') === 1 ? 'outline' : row.getValue('estado') === 2 ? 'default' : 'destructive'}>
-        {row.getValue('estado') === 1 ? 'Pendiente' : row.getValue('estado') === 2 ? 'Autorizado' : 'Rechazado'}
+      <Badge variant={estadoVariantMap[row.getValue('estado') as number] || 'default'}>
+        {estadoMap[row.getValue('estado') as number] || 'Desconocido'}
       </Badge>
     ),
   },
+
   {
     accessorKey: 'vecino',
     header: ({ column }) => <Sort column={column} name='Vecino' />,
-    cell: ({ row }) => <>{row.getValue('vecino')}</>,
+    cell: ({ row }) => <>{row.getValue('vecino') ?? '-'}</>,
   },
   {
     accessorKey: 'fecha de creación',

@@ -24,6 +24,7 @@ const DetailClaim = ({ data, isLoading }: { data: Claim | undefined; isLoading: 
       <Datum
         isLoading={isLoading}
         title='Ubicación del reclamo'
+        // datum={<MapOnlyView value={data?.latitud && data?.longitud ? [data?.latitud, data?.longitud] : defaultLocation} />}
         datum={<MapOnlyView value={defaultLocation} />}
         styles='col-span-2'
       />

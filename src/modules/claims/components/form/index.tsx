@@ -1,21 +1,29 @@
 import DigitalAutocomplete from '@/modules/shared/components/inputs/digital-autocomplete'
 import DigitalInput from '@/modules/shared/components/inputs/digital-input'
 import DigitalTextarea from '@/modules/shared/components/inputs/digital-textarea'
+import { useNeighborhoodCatalog } from '@/modules/shared/hooks/use-neighborhood-catalog'
 import { UseFormReturn } from 'react-hook-form'
+import MapSearcher from '../../../shared/components/maps/searcher'
 import { ClaimFormDto } from '../../dto/claim-form.dto'
 import { useClaimsCatalog } from '../../hooks/use-claims-catalog'
 import { useOriginCatalog } from '../../hooks/use-origin-catalog'
+import { usePrioritiesCatalog } from '../../hooks/use-priorities-catalog'
 import { useServiceAreaCatalog } from '../../hooks/use-service-area-catalog'
-import MapSearcher from '../../../shared/components/maps/searcher'
-import { useNeighborhoodCatalog } from '@/modules/shared/hooks/use-neighborhood-catalog'
 
 const ClaimForm = ({ form }: { form: UseFormReturn<ClaimFormDto> }) => {
   const neighborhoodCatalog = useNeighborhoodCatalog()
   const serviceAreaCatalog = useServiceAreaCatalog()
+  const prioritiesCatalog = usePrioritiesCatalog()
   const claimsCatalog = useClaimsCatalog()
   const originCatalog = useOriginCatalog()
 
-  if (claimsCatalog.isLoading || serviceAreaCatalog.isLoading || originCatalog.isLoading || neighborhoodCatalog.isLoading) {
+  if (
+    claimsCatalog.isLoading ||
+    serviceAreaCatalog.isLoading ||
+    originCatalog.isLoading ||
+    neighborhoodCatalog.isLoading ||
+    prioritiesCatalog.isLoading
+  ) {
     return <p>Cargando...</p>
   }
 
@@ -31,6 +39,10 @@ const ClaimForm = ({ form }: { form: UseFormReturn<ClaimFormDto> }) => {
     return { label: o.descripcion, value: o.id.toString() }
   })
 
+  const prioritiesOptions = prioritiesCatalog.data?.data?.map(o => {
+    return { label: o.descripcion, value: o.id.toString() }
+  })
+
   const neighborhoodOptions = neighborhoodCatalog.data?.map(n => {
     return { label: n.descripcion, value: n.id.toString() }
   })
@@ -39,7 +51,7 @@ const ClaimForm = ({ form }: { form: UseFormReturn<ClaimFormDto> }) => {
     <div className='md:grid md:grid-cols-2 flex flex-col gap-2 py-0 md:gap-4 md:py-4'>
       <DigitalInput name='direccion' placeholder='Direccion' label='Dirección' form={form} />
       <DigitalAutocomplete name='barrio' options={neighborhoodOptions} form={form} label='Barrio' placeholder='barrio' />
-      <DigitalAutocomplete name='prioridad' options={[]} form={form} label='Prioridad' placeholder='prioridad' />
+      <DigitalAutocomplete name='prioridad' options={prioritiesOptions} form={form} label='Prioridad' placeholder='prioridad' />
       <DigitalAutocomplete
         name='tipoIncidente'
         options={claimsOptions}

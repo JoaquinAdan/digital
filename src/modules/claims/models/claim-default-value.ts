@@ -1,12 +1,12 @@
 import { defaultLocation } from '@/configs/constants/default-location'
 
 export const claimDefaultValue = {
-  ciudadano: '',
+  ciudadano: '507be90a-e7ed-485c-ad1e-04052ec27c74',
   observaciones: '',
   tipoIncidente: '',
   origen: '',
   areaServicio: '',
-  prioridad: '1',
+  prioridad: '',
   barrio: '',
   direccion: '',
   coordinates: {

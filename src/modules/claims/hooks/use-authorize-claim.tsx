@@ -6,7 +6,7 @@ import { postAuthorizeClaimHttp } from '../services/post-authorize-claim'
 export const useAuthorizeClaim = (onSuccess: () => void, onError: () => void) => {
   const { token } = useAuth()
   const coords = useMutation({
-    mutationFn: (payload: AuthorizeForm) => postAuthorizeClaimHttp(payload, token as string),
+    mutationFn: ({ payload, id }: { payload: AuthorizeForm; id?: string }) => postAuthorizeClaimHttp(payload, token as string, id),
     onSuccess,
     onError,
   })

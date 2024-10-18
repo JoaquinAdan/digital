@@ -10,7 +10,7 @@ const toClaimViewModel = (data?: Claim[]): ClaimViewModel[] => {
     origen: claim.origen.descripcion,
     'otros datos': claim.otrosDatos,
     'fecha de creación': claim.fechaAlta,
-    vecino: claim.ciudadanoId,
+    vecino: claim.ciudadano,
     estado: claim.estadoId,
     adminId: claim.adminId,
     observaciones: claim.observaciones,

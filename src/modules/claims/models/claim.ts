@@ -8,6 +8,9 @@ export interface Claim {
   origen: Catalog
   otrosDatos: string
   ciudadanoId: string
+  ciudadano: string
+  latitud: number | null
+  longitud: number | null
   adminId: number
   estadoId: number
   observaciones: string
